@@ -1277,40 +1277,17 @@ const pdfReportAutoTableFichaRegistration = async (
   data,
   created,
   personData,
-  idProgram,
-  codePlan
 ) => {
   let arrayData = [];
-
-  let acronymPrograms = [
-    { id: 1, des: "ECO" },
-    { id: 3, des: "CACU" },
-    { id: 5, des: "ARO" },
-  ];
-  let acronProgram = acronymPrograms.find((e) => e.id == idProgram).des;
-  let numberCiclos = [
-    { letter: "I", num: "01" },
-    { letter: "II", num: "02" },
-    { letter: "III", num: "03" },
-  ];
-  let numCiclo = "";
-  let codPlan = codePlan.substring(codePlan.length - 2);
-
-  let orderCourse = "";
-  let codeCourse = "";
 
   let typeCourse = "";
   let totalCredit = 0;
 
   data.map((r) => {
-    numCiclo = numberCiclos.find((e) => e.letter == r.ciclo).num;
-    orderCourse = r.order < 10 ? "0" + r.order : r.order;
-    // codeCourse = acronProgram + "-" + codPlan + numCiclo + orderCourse;
-    codeCourse = acronProgram + r.ciclo + codPlan + "-" + orderCourse;
     totalCredit = parseFloat(r.credits) + totalCredit;
     typeCourse = r.type_course == "Obligatorio" ? "O" : "E";
     return arrayData.push([
-      codeCourse,
+      r.code,
       r.denomination,
       typeCourse,
       r.ciclo,
@@ -1425,7 +1402,7 @@ const pdfReportAutoTableFichaRegistration = async (
   pdf.setFont("helvetica", "bold");
   pdf.text("TIPO:", 10, finalTable - 5);
   pdf.setFont("helvetica", "normal");
-  pdf.text("O: Obligatorio", 18, finalTable - 5);
+  pdf.text("O: Obligatorio, E: Electivo", 18, finalTable - 5);
 
   pdf.setFontSize(7);
   pdf.setFont("helvetica", "bold");
@@ -2693,6 +2670,7 @@ const pdfReportAutoTableConstancyStudy = async (data) => {
 };
 const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
   let student = data.studentData.Person.name;
+  let codeStudent = data.studentData.Person.document_number;
   let program = data.studentData.Program.denomination;
 
   let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
@@ -2732,14 +2710,14 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
   // pdf.text('N°' + correlative, 190, 40, {align: 'right'});
   pdf.setFontSize(26);
   pdf.setFont("times", "bold");
-  pdf.text("CONSTANCIA DE ESTUDIO", pageWidth / 2, 60, "center");
+  pdf.text("CONSTANCIA DE ESTUDIO N° " + correlative, pageWidth / 2, 60, "center");
   pdf.setLineWidth(0.5);
   pdf.line(19, 62, 192, 62);
 
   pdf.setFontSize(14);
   pdf.setFont("helvetica", "normal");
   pdf.text(
-    "La Decana de la Facultad de Ciencias de la Salud DRA. EVANGELINA AMPUERO FERNÁNDEZ, de la Universidad Nacional de San Martín, extiende la presente constancia a:",
+    "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la Unidad de Segunda Especialidad, Facultad de Ciencias de la Salud, Universidad Nacional de San Martín, extiende la presente constancia a:",
     20,
     75,
     {
@@ -2755,17 +2733,19 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
 
   pdf.setFont("helvetica", "normal");
   pdf.text(
-    "Quien, es estudiante del Programa de " +
-      program +
-      " Promoción " +
-      admissionPlan +
-      " sede " +
-      sede +
-      "; actualmente se encuentra cursando el ciclo " +
+    "El(La) estudiante con Código (DNI) N°: " +
+      codeStudent +
+      "; actualmente se encuentra matriculado(a) en el " +
       ciclo +
-      ", en la Facultad de Ciencias de la Salud.",
+      " ciclo del Programa de " +
+      program +
+      ", Promoción  " +
+      admissionPlan +
+      ", sede " +
+      sede +
+      ".",
     20,
-    130,
+    125,
     {
       maxWidth: 170,
       align: "justify",
@@ -2775,7 +2755,7 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
   pdf.text(
     "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
     20,
-    160,
+    155,
     {
       maxWidth: 170,
       align: "justify",
@@ -2788,12 +2768,22 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
 
   pdf.text("Atentamente", pageWidth / 2, 200, "center");
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(11);
+  pdf.setFontSize(10);
   pdf.line(66, 250, 145, 250);
-  pdf.text("DRA. EVANGELINA AMPUERO FERNÁNDEZ", pageWidth / 2, 253.5, "center");
+  pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
   pdf.setFont("helvetica", "normal");
 
-  pdf.text("Decana de FCS", pageWidth / 2, 257, "center");
+  pdf.setFontSize(11);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
+
+  pdf.setFontSize(10);
+  pdf.text(
+    "Unidad de Segunda Especialidad - FCS",
+    pageWidth / 2,
+    261,
+    "center"
+  );
 
   pdf.setFontSize(7);
   pdf.setFont("helvetica", "normal");

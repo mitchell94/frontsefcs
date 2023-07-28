@@ -89,7 +89,6 @@ class Registration extends Component {
         academicDegree: res.data.Program.Academic_degree.denomination,
         // Agregado MPT
         personData: res.data.Person,
-        codePlan: res.data.Plan.code,
       });
     } catch (err) {
       PNotify.error({
@@ -706,8 +705,6 @@ class Registration extends Component {
                       leaveDataRegistration={this.leaveDataRegistration}
                       deleteSweetRegistration={this.deleteSweetRegistration}
                       personData={this.state.personData}
-                      idProgram={this.state.programID}
-                      codePlan={this.state.codePlan}
                     />
                   </div>
                   <br />

@@ -30,6 +30,7 @@ const FormChangeProgram = (props) => {
     let isShown = props.isShown;
     let organicUnitId = props.organicUnitId;
     let personId = props.personId;
+    let lastProgramId = props.lastProgramId;
 
     const [programId, setProgramId] = useState("");
     const [admissionPlanId, setAdmissionPlaId] = useState("");
@@ -41,6 +42,7 @@ const FormChangeProgram = (props) => {
     const [conceptId, setConceptId] = useState("");
     // const [listCostsAdmissionPlan, setListCostsAdmissionPlan] = useState([]);
     const [studyPlanDescription, setStudyPlanDescription] = useState("");
+    const [semesterId, setSemesterId] = useState("");
 
     useEffect(() => {
         setStudyPlanDescription("");
@@ -58,10 +60,13 @@ const FormChangeProgram = (props) => {
                 let element = document.getElementById(
                     "admission-plan-form-" + event.target.value
                 );
+                // Obtiene planId, description y semesterId a partir del selector de planes de admision
                 let dataId = element.dataset.studyPlanId;
                 setStudyPlanId(dataId);
                 let dataDescription = element.dataset.studyPlanDescription;
                 setStudyPlanDescription(dataDescription);
+                let dataSemesterId = element.dataset.semesterId;
+                setSemesterId(dataSemesterId);
                 break;
             default:
                 break;
@@ -128,9 +133,10 @@ const FormChangeProgram = (props) => {
         conceptId: "",
         programId: "",
         studyPlanId: "",
-        // processId: """,
+        semesterId: "",
         personId: "",
         discount: false,
+        lastProgramId: "",
     });
 
     useEffect(() => {
@@ -142,7 +148,9 @@ const FormChangeProgram = (props) => {
             programId: Number(programId),
             studyPlanId: Number(studyPlanId),
             personId: personId,
+            semesterId: Number(semesterId),
             discount: false,
+            lastProgramId: Number(lastProgramId),
         });
     }, [
         organicUnitId,
@@ -152,6 +160,8 @@ const FormChangeProgram = (props) => {
         programId,
         studyPlanId,
         personId,
+        semesterId,
+        lastProgramId,
     ]);
 
     console.log(studentForm);
@@ -165,7 +175,9 @@ const FormChangeProgram = (props) => {
             studentForm.conceptId !== "" &&
             studentForm.programId !== "" &&
             studentForm.studyPlanId !== "" &&
-            studentForm.personId !== ""
+            studentForm.personId !== "" &&
+            studentForm.semesterId !== "" &&
+            studentForm.lastProgramId
         ) {
             let data = new FormData();
             data.set("id_organic_unit", studentForm.organicUnitId);
@@ -175,8 +187,9 @@ const FormChangeProgram = (props) => {
             data.set("id_program", studentForm.programId);
             data.set("id_plan", studentForm.studyPlanId);
             data.set("id_person", studentForm.personId);
-            // data.set("id_process", process);
+            data.set("id_semester", studentForm.semesterId);
             data.set("discount", studentForm.discount);
+            data.set("id_last_program", studentForm.lastProgramId)
 
             try {
                 const res = await axios.post(url, data, app.headers);
@@ -307,6 +320,7 @@ const FormChangeProgram = (props) => {
                                                 data-study-plan-description={
                                                     r.Plan.description
                                                 }
+                                                data-semester-id={r.id_process}
                                                 value={r.id}
                                                 key={k}
                                             >

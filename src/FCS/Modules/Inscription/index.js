@@ -566,6 +566,7 @@ class Inscription extends Component {
                     // FORM DATA
                     organicUnitId={this.state.organicUnit.value}
                     personId={this.state.personId}
+                    lastProgramId={this.state.program}
                 />
             </>
         );

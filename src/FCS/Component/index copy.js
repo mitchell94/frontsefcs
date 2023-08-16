@@ -24,9 +24,6 @@ const token = localStorage.getItem("TOKEN") || null;
 let universityName = "Universidad Nacional de San Martín";
 let facultyName = "Facultad de Ciencias de la Salud";
 let unityName = "Unidad de Segunda Especialidad";
-
-const imgUnsm = logoUnsm;
-const imgFcs = logoFcs;
 // MPT
 
 const spiner = (
@@ -1316,89 +1313,70 @@ const pdfReportAutoTableFichaRegistration = async (
 
     // const pdf = new jsPDF({orientation: "l"});
     const pdf = new jsPDF();
+    const imgData = logoUnsm;
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
-    pdf.setFontSize(17);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
+    // let pageHeight = pdf.internal.pageSize.getHeight();
     pdf.setFontSize(14);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
-    pdf.setFontSize(16);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
-
-    // const pdf = new jsPDF();
-    // const imgData = logoUnsm;
-    // const totalPagesExp = "{total_pages_count_string}";
-    // let pageWidth = pdf.internal.pageSize.getWidth();
-    // // let pageHeight = pdf.internal.pageSize.getHeight();
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTIN", 25, 15);
-    // pdf.addImage(imgData, "JPEG", 8, 10, 15, 13);
-    // pdf.setFontSize(10);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text(mastePosgrade, 25, 20);
-
-    pdf.setFontSize(23);
     pdf.setFont("helvetica", "bold");
-    pdf.text("FICHA DE MATRÍCULA", pageWidth / 2, 58, "center");
-    pdf.setLineWidth(0.5);
-    pdf.line(20, 59, 190, 59);
+    pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTIN", 25, 15);
+    pdf.addImage(imgData, "JPEG", 8, 10, 15, 13);
+    pdf.setFontSize(10);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(mastePosgrade, 25, 20);
 
-    // pdf.setFontSize(12);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("FICHA DE MATRÍCULA", pageWidth / 2, 30, "center");
+    pdf.setFontSize(12);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("FICHA DE MATRÍCULA", pageWidth / 2, 30, "center");
 
     pdf.setFontSize(10);
     pdf.setFont("helvetica", "bold");
-    pdf.text("PROGRAMA", 20, 70);
-    pdf.text(":", 44, 70);
-    pdf.setFont("helvetica", "normal");
-    let splitTitle = pdf.splitTextToSize(program, 142);
-    pdf.text(splitTitle, 47, 70);
+    pdf.text("PROGRAMA", 10, 40);
+    pdf.text(":", 34, 40);
 
-    // //
-    pdf.setFont("helvetica", "bold");
-    pdf.text("UNIDAD", 20, 80);
-    pdf.text(":", 44, 80);
     pdf.setFont("helvetica", "normal");
-    pdf.text(unitRegistration, 47, 80);
+    // pdf.text(program, 37, 40);
+    let splitTitle = pdf.splitTextToSize(program, 160);
+    pdf.text(splitTitle, 37, 40);
 
+    //
     pdf.setFont("helvetica", "bold");
-    pdf.text("SEDE", 20, 85);
-    pdf.text(":", 44, 85);
+    pdf.text("UNIDAD", 10, 50);
+    pdf.text(":", 34, 50);
     pdf.setFont("helvetica", "normal");
-    pdf.text(sedeRegistration, 47, 85);
+    pdf.text(unitRegistration, 37, 50);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("ESTUDIANTE", 20, 90);
-    pdf.text(":", 44, 90);
+    pdf.text("SEDE", 10, 55);
+    pdf.text(":", 34, 55);
     pdf.setFont("helvetica", "normal");
-    pdf.text(personData.name, 47, 90);
-    // pdf.text(person, 47, 90);
+    pdf.text(sedeRegistration, 37, 55);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("CÓDIGO/DNI", 20, 95);
-    pdf.text(":", 44, 95);
+    pdf.text("ESTUDIANTE", 10, 60);
+    pdf.text(":", 34, 60);
     pdf.setFont("helvetica", "normal");
-    pdf.text(personData.document_number, 47, 95);
+    pdf.text(personData.name, 37, 60);
+    // pdf.text(person, 37, 60);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("FECHA", 20, 100);
-    pdf.text(":", 44, 100);
+    pdf.text("CÓDIGO", 10, 65);
+    pdf.text(":", 34, 65);
     pdf.setFont("helvetica", "normal");
-    pdf.text(moment(created).format("DD/MM/YYYY"), 47, 100);
+    pdf.text(personData.document_number, 37, 65);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("SEMESTRE", 20, 105);
-    pdf.text(":", 44, 105);
+    pdf.text("FECHA", 10, 70);
+    pdf.text(":", 34, 70);
     pdf.setFont("helvetica", "normal");
-    // pdf.text(data[i].Academic_semester.Academic_calendar.denomination + '-' + data[i].Academic_semester.denomination, 47, 55);
-    pdf.text(process, 47, 105);
+    pdf.text(moment(created).format("DD/MM/YYYY"), 37, 70);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SEMESTRE", 10, 75);
+    pdf.text(":", 34, 75);
+    pdf.setFont("helvetica", "normal");
+    // pdf.text(data[i].Academic_semester.Academic_calendar.denomination + '-' + data[i].Academic_semester.denomination, 37, 55);
+    pdf.text(process, 37, 75);
 
     let head = [
         [
@@ -1410,7 +1388,7 @@ const pdfReportAutoTableFichaRegistration = async (
         ],
     ];
     pdf.autoTable({
-        margin: [28, 20],
+        margin: [28, 10],
         theme: "grid",
         styles: {
             fontSize: 7,
@@ -1423,13 +1401,13 @@ const pdfReportAutoTableFichaRegistration = async (
             fillColor: "#000",
         },
         columnStyles: {
-            0: { cellWidth: 22 },
-            1: { cellWidth: 115 },
+            0: { cellWidth: 23 },
+            1: { cellWidth: 135 },
             2: { cellWidth: 10, halign: "center" },
             3: { cellWidth: 12, halign: "center" },
             4: { cellWidth: 10, halign: "center" },
         },
-        startY: 110,
+        startY: 80,
         head: head,
         body: arrayData,
     });
@@ -1438,35 +1416,35 @@ const pdfReportAutoTableFichaRegistration = async (
 
     pdf.setFontSize(7);
     pdf.setFont("helvetica", "bold");
-    pdf.text("TIPO:", 20, finalTable - 5);
+    pdf.text("TIPO:", 10, finalTable - 5);
     pdf.setFont("helvetica", "normal");
-    pdf.text("O: Obligatorio, E: Electivo", 28, finalTable - 5);
+    pdf.text("O: Obligatorio, E: Electivo", 18, finalTable - 5);
 
     pdf.setFontSize(7);
     pdf.setFont("helvetica", "bold");
-    pdf.text("CTS:", 65, finalTable - 5);
+    pdf.text("CTS:", 55, finalTable - 5);
     pdf.setFont("helvetica", "normal");
-    pdf.text("Créditos", 73, finalTable - 5);
+    pdf.text("Créditos", 63, finalTable - 5);
 
     pdf.setFontSize(7);
     pdf.setFont("helvetica", "bold");
-    pdf.text("TOTAL CTS:", 170, finalTable - 5);
+    pdf.text("TOTAL CTS:", 180, finalTable - 5);
     pdf.setFontSize(8);
     pdf.setFont("helvetica", "normal");
-    pdf.text(String(totalCredit), 186, finalTable - 5);
+    pdf.text(String(totalCredit), 196, finalTable - 5);
 
     pdf.setDrawColor(0, 0, 0);
     pdf.setFont("helvetica", "bold");
     pdf.setTextColor("black");
     pdf.setFontSize(8);
     pdf.setLineWidth(0.5);
-    pdf.line(25, finalTable + 25, 65, finalTable + 25);
-    pdf.text("FIRMA DEL ESTUDIANTE", 28, finalTable + 28);
+    pdf.line(15, finalTable + 19, 60, finalTable + 19);
+    pdf.text("FIRMA DEL ESTUDIANTE", 20, finalTable + 22);
 
     pdf.setFontSize(8);
     pdf.setLineWidth(0.5);
-    pdf.line(142, finalTable + 25, 185, finalTable + 25);
-    pdf.text("FIRMA DEL COORDINADOR", 145, finalTable + 28);
+    pdf.line(150, finalTable + 19, 200, finalTable + 19);
+    pdf.text("FIRMA DEL COORDINADOR", 155, finalTable + 22);
 
     pdf.setFontSize(7);
 
@@ -2437,239 +2415,121 @@ const pdfReportAutoTableConstancyExpedito = async (data) => {
 };
 const pdfReportAutoTableConstancyEntrySeunsm = async (data) => {
     let student = data.studentData.Person.name;
-    let codeStudent = data.studentData.Person.document_number;
+    let dni = data.studentData.Person.document_number;
     let program = data.studentData.Program.denomination;
     let admissionPlan = data.studentData.Admission_plan.description.substr(16);
     let duration = data.studentData.Admission_plan.duration;
     let dateClass = moment(data.studentData.Admission_plan.date_class).format(
         "LL"
     );
-    let date = data.date;
-    let principalOrganicUnit = data.principalOrganicUnit.description;
-    let correlative = data.correlative;
 
-    // ::::::::::::::::::::::::::::::::::::::::::::::::::start
+    let date = data.date;
+
+    let principalOrganicUnit = data.principalOrganicUnit.description;
+
     const pdf = new jsPDF();
+    const imgData = logoUnsm;
+
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
-    pdf.setFontSize(17);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
-    pdf.setFontSize(14);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
-    pdf.setFontSize(16);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
+    // let pageHeight = pdf.internal.pageSize.getHeight();
+    pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
+    if (entity === 1) {
+        pdf.addImage(logoEpg, "JPEG", 168, 14, 28, 28);
+    }
 
-    pdf.setFontSize(23);
-    pdf.setFont("helvetica", "bold");
-    pdf.text(
-        "CONSTANCIA DE INGRESO" + " N°" + correlative,
-        pageWidth / 2,
-        58,
-        "center"
-    );
+    pdf.setFontSize(18);
+    pdf.setFont("helvetica", "normal");
+
+    pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
+
+    pdf.setFontSize(18);
+    pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
+    // pdf.setFontSize(16);
+    // pdf.text(principalOrganicUnit, 50, 40);
+    // pdf.setFontSize(11);
+    // pdf.text('N°' + correlative, 190, 40, {align: 'right'});
+    pdf.setFontSize(26);
+    pdf.setFont("times", "bold");
+    pdf.text("CONSTANCIA DE INGRESO N°", pageWidth / 2, 60, "center");
     pdf.setLineWidth(0.5);
-    pdf.line(20, 59, 190, 59);
+    pdf.line(30, 62, 181, 62);
 
     pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-            unityName +
-            " de la " +
-            facultyName +
-            ", " +
-            universityName +
-            ", extiende la presente constancia a:",
+        "La Coordinadora de la Unidad de Segunda Especialidad de la Facultad de Ciencias de la Salud Obsta. YNES TORRES FLORES de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
         20,
         75,
         {
-            maxWidth: 169,
+            maxWidth: 170,
             align: "justify",
         }
     );
-
     pdf.setFontSize(21);
     pdf.setFont("helvetica", "bold");
     pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
 
     pdf.setFontSize(14);
+
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "El/La estudiante con código (DNI) N° " +
-            codeStudent +
-            ", ha sido admitido/a al Programa de " +
+        "Identificado con DNI N° " +
+            dni +
+            ", ha sido adminito al programa de estudio de la " +
             program +
-            " - Promoción " +
+            " promoción" +
             admissionPlan +
-            ". El programa tendrá una duración de " +
+            ".",
+        20,
+        130,
+        {
+            maxWidth: 170,
+            align: "justify",
+        }
+    );
+
+    pdf.text(
+        "El programa de la " +
+            principalOrganicUnit +
+            " tendra una duración de " +
             duration +
-            " meses, el mismo que inició el " +
+            " meses el mismo que inicio el " +
             dateClass +
             ".",
         20,
-        123,
+        150,
         {
-            maxWidth: 169,
+            maxWidth: 170,
             align: "justify",
         }
     );
-    // pdf.text(
-    //     "El programa de la " +
-    //         unityName +
-    //         " tendra una duración de " +
-    //         duration +
-    //         " meses el mismo que inició el " +
-    //         dateClass +
-    //         ".",
-    //     20,
-    //     135,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
     pdf.text(
-        "Se extiende la presente constancia a petición del interesado/a para los fines que considere conveniente.",
+        "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
         20,
-        153,
+        165,
         {
-            maxWidth: 169,
+            maxWidth: 170,
             align: "justify",
         }
     );
-
     pdf.setFont("helvetica", "bold");
-    pdf.text("Tarapoto, " + date, 190, 205, {
+    pdf.text("Tarapoto, " + date, 190, 180, {
         align: "right",
     });
 
-    pdf.text("Atentamente", pageWidth / 2, 225, "center");
+    pdf.text("Atentamente", pageWidth / 2, 200, "center");
 
-    pdf.line(66, 250, 145, 250);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(11);
-    pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
+    pdf.line(66, 240, 145, 240);
+    pdf.text("Obsta. YNES TORRES FLORES", pageWidth / 2, 243.5, "center");
     pdf.setFont("helvetica", "normal");
 
-    pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
+    pdf.text("Coordinadora de la USE", pageWidth / 2, 247, "center");
 
-    pdf.setFontSize(11);
+    pdf.setFontSize(7);
     pdf.setFont("helvetica", "normal");
-    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 261.5, "center");
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Tarapoto, " + date, 190, 185, {
-    //     align: "right",
-    // });
-
-    // pdf.text("Atentamente", pageWidth / 2, 205, "center");
-
-    // pdf.line(66, 230, 145, 230);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.setFontSize(11);
-    // pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 233.5, "center");
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.text("COORDINADORA", pageWidth / 2, 237.5, "center");
-
-    // pdf.setFontSize(11);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 241.5, "center");
-
-    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: end
-
-    // pdf.setFontSize(18);
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
-
-    // pdf.setFontSize(18);
-    // pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.setFontSize(26);
-    // pdf.setFont("times", "bold");
-    // pdf.text("CONSTANCIA DE INGRESO N°", pageWidth / 2, 60, "center");
-    // pdf.setLineWidth(0.5);
-    // pdf.line(30, 62, 181, 62);
-
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "La Coordinadora de la Unidad de Segunda Especialidad de la Facultad de Ciencias de la Salud Obsta. YNES TORRES FLORES de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
-    //     20,
-    //     75,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFontSize(21);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
-
-    // pdf.setFontSize(14);
-
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "Identificado con DNI N° " +
-    //         dni +
-    //         ", ha sido adminito al programa de estudio de la " +
-    //         program +
-    //         " promoción" +
-    //         admissionPlan +
-    //         ".",
-    //     20,
-    //     130,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-
-    // pdf.text(
-    //     "El programa de la " +
-    //         principalOrganicUnit +
-    //         " tendra una duración de " +
-    //         duration +
-    //         " meses el mismo que inicio el " +
-    //         dateClass +
-    //         ".",
-    //     20,
-    //     150,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.text(
-    //     "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
-    //     20,
-    //     165,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Tarapoto, " + date, 190, 180, {
-    //     align: "right",
-    // });
-
-    // pdf.text("Atentamente", pageWidth / 2, 200, "center");
-
-    // pdf.setFont("helvetica", "bold");
-    // pdf.setFontSize(11);
-    // pdf.line(66, 240, 145, 240);
-    // pdf.text("Obsta. YNES TORRES FLORES", pageWidth / 2, 243.5, "center");
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.text("Coordinadora de la USE", pageWidth / 2, 247, "center");
-
-    // pdf.setFontSize(7);
-    // pdf.setFont("helvetica", "normal");
 
     // pdf.setFontSize(7)
     // pdf.setFont("helvetica", "normal");
@@ -2830,7 +2690,9 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
     let student = data.studentData.Person.name;
     let codeStudent = data.studentData.Person.document_number;
     let program = data.studentData.Program.denomination;
+
     let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
+
     let sede =
         data.studentData.Program.Organic_unit_register.Campu.denomination;
     let ciclo = data.ciclo;
@@ -2843,230 +2705,134 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
     let principalOrganicUnit = data.principalOrganicUnit.description;
     let descriptionOrganicUnit = data.principalOrganicUnit.abbreviation;
 
-    // CODIGO NUEVO
     const pdf = new jsPDF();
+    const imgData = logoUnsm;
+
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
-    pdf.setFontSize(17);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
-    pdf.setFontSize(14);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
-    pdf.setFontSize(16);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
+    // let pageHeight = pdf.internal.pageSize.getHeight();
+    pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
+    if (entity === 1) {
+        // pdf.addImage(logoEpg, 'JPEG', 168, 14, 28, 28);
+    }
 
-    pdf.setFontSize(23);
-    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(18);
+    pdf.setFont("helvetica", "normal");
+    pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
+    // pdf.setFontSize(16);
+    // pdf.text(facultyName, pageWidth / 2, 24, "center");
+    pdf.setFontSize(18);
+    pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
+    // pdf.setFontSize(16);
+    // pdf.text(principalOrganicUnit, 50, 40);
+    // pdf.setFontSize(11);
+    // pdf.text('N°' + correlative, 190, 40, {align: 'right'});
+    pdf.setFontSize(26);
+    pdf.setFont("times", "bold");
     pdf.text(
-        "CONSTANCIA DE ESTUDIO" + " N°" + correlative,
+        "CONSTANCIA DE ESTUDIO N° " + correlative,
         pageWidth / 2,
-        58,
+        60,
         "center"
     );
     pdf.setLineWidth(0.5);
-    pdf.line(20, 59, 190, 59);
+    pdf.line(19, 62, 192, 62);
 
     pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-            unityName +
-            " de la " +
-            facultyName +
-            ", " +
-            universityName +
-            ", extiende la presente constancia a:",
+        "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la Unidad de Segunda Especialidad, Facultad de Ciencias de la Salud, Universidad Nacional de San Martín, extiende la presente constancia a:",
         20,
         75,
         {
-            maxWidth: 169,
+            maxWidth: 170,
             align: "justify",
         }
     );
-
     pdf.setFontSize(21);
     pdf.setFont("helvetica", "bold");
     pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
 
     pdf.setFontSize(14);
+
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "El/La estudiante con código (DNI) N° " +
+        "El(La) estudiante con Código (DNI) N°: " +
             codeStudent +
-            ", actualmente se encuentra matriculado/a en el ciclo " +
+            "; actualmente se encuentra matriculado(a) en el " +
             ciclo +
-            " del Programa de " +
+            " ciclo del Programa de " +
             program +
-            " - Promoción " +
+            ", Promoción  " +
             admissionPlan +
             ", sede " +
             sede +
             ".",
         20,
-        123,
+        125,
         {
-            maxWidth: 169,
-            align: "justify",
-        }
-    );
-    pdf.text(
-        "Se extiende la presente constancia a petición del interesado/a para los fines que considere conveniente.",
-        20,
-        153,
-        {
-            maxWidth: 169,
+            maxWidth: 170,
             align: "justify",
         }
     );
 
+    pdf.text(
+        "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
+        20,
+        155,
+        {
+            maxWidth: 170,
+            align: "justify",
+        }
+    );
     pdf.setFont("helvetica", "bold");
-    pdf.text("Tarapoto, " + date, 190, 205, {
+    pdf.text("Tarapoto, " + date, 190, 180, {
         align: "right",
     });
 
-    pdf.text("Atentamente", pageWidth / 2, 225, "center");
-
-    pdf.line(66, 250, 145, 250);
+    pdf.text("Atentamente", pageWidth / 2, 200, "center");
     pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(11);
+    pdf.setFontSize(10);
+    pdf.line(66, 250, 145, 250);
     pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
     pdf.setFont("helvetica", "normal");
 
+    pdf.setFontSize(11);
+    pdf.setFont("helvetica", "bold");
     pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
 
-    pdf.setFontSize(11);
+    pdf.setFontSize(10);
+    pdf.text(
+        "Unidad de Segunda Especialidad - FCS",
+        pageWidth / 2,
+        261,
+        "center"
+    );
+
+    pdf.setFontSize(7);
     pdf.setFont("helvetica", "normal");
-    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 261.5, "center");
+
+    // pdf.setFontSize(7)
+    // pdf.setFont("helvetica", "normal");
+    // pdf.text(moment().format('HH:mm DD/MM/YYYY '), 181, 65);
+
+    const pageCount = pdf.internal.getNumberOfPages();
+
+    // pdf.setFont('helvetica', 'normal')
+    // pdf.setFontSize(8)
+    // for (let i = 1; i <= pageCount; i++) {
+    //     pdf.setPage(i)
+    //     pdf.text('Pag ' + String(i) + ' de ' + String(pageCount), 197, 287, {
+    //         align: 'right'
+    //     })
+    // }
 
     // Total page number plugin only available in jspdf v1.0+
     if (typeof pdf.putTotalPages === "function") {
         pdf.putTotalPages(totalPagesExp);
     }
 
-    pdf.save("CONSTANCIA-ESTUDIO-" + student + ".pdf");
-
-    // CODIGO ANTIGUO HACIA ABAJO
-    // const pdf = new jsPDF();
-    // const imgData = logoUnsm;
-
-    // const totalPagesExp = "{total_pages_count_string}";
-    // let pageWidth = pdf.internal.pageSize.getWidth();
-    // pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
-    // pdf.setFontSize(18);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
-    // pdf.setFontSize(18);
-    // pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.setFontSize(26);
-    // pdf.setFont("times", "bold");
-    // pdf.text(
-    //     "CONSTANCIA DE ESTUDIO N° " + correlative,
-    //     pageWidth / 2,
-    //     60,
-    //     "center"
-    // );
-    // pdf.setLineWidth(0.5);
-    // pdf.line(19, 62, 192, 62);
-
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la Unidad de Segunda Especialidad, Facultad de Ciencias de la Salud, Universidad Nacional de San Martín, extiende la presente constancia a:",
-    //     20,
-    //     75,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFontSize(21);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
-
-    // pdf.setFontSize(14);
-
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "El(La) estudiante con Código (DNI) N°: " +
-    //         codeStudent +
-    //         "; actualmente se encuentra matriculado(a) en el " +
-    //         ciclo +
-    //         " ciclo del Programa de " +
-    //         program +
-    //         ", Promoción  " +
-    //         admissionPlan +
-    //         ", sede " +
-    //         sede +
-    //         ".",
-    //     20,
-    //     125,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-
-    // pdf.text(
-    //     "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
-    //     20,
-    //     155,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Tarapoto, " + date, 190, 180, {
-    //     align: "right",
-    // });
-
-    // pdf.text("Atentamente", pageWidth / 2, 200, "center");
-    // pdf.setFont("helvetica", "bold");
-    // pdf.setFontSize(10);
-    // pdf.line(66, 250, 145, 250);
-    // pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.setFontSize(11);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
-
-    // pdf.setFontSize(10);
-    // pdf.text(
-    //     "Unidad de Segunda Especialidad - FCS",
-    //     pageWidth / 2,
-    //     261,
-    //     "center"
-    // );
-
-    // pdf.setFontSize(7);
-    // pdf.setFont("helvetica", "normal");
-
-    // // pdf.setFontSize(7)
-    // // pdf.setFont("helvetica", "normal");
-    // // pdf.text(moment().format('HH:mm DD/MM/YYYY '), 181, 65);
-
-    // const pageCount = pdf.internal.getNumberOfPages();
-
-    // // pdf.setFont('helvetica', 'normal')
-    // // pdf.setFontSize(8)
-    // // for (let i = 1; i <= pageCount; i++) {
-    // //     pdf.setPage(i)
-    // //     pdf.text('Pag ' + String(i) + ' de ' + String(pageCount), 197, 287, {
-    // //         align: 'right'
-    // //     })
-    // // }
-
-    // // Total page number plugin only available in jspdf v1.0+
-    // if (typeof pdf.putTotalPages === "function") {
-    //     pdf.putTotalPages(totalPagesExp);
-    // }
-
-    // pdf.save("CONSTANCIA-ESTUDIOS-" + student + ".pdf");
+    pdf.save("CONSTANCIA-ESTUDIOS-" + student + ".pdf");
 };
 const pdfReportAutoTableConstancyEgress = async (data) => {
     let student = data.studentData.Person.name;
@@ -3217,18 +2983,26 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     let student = data.studentData.Person.name;
     let firtsRegister = data.firtsRegister;
     let lastRegister = data.lastRegister;
-    let codeStudent = data.studentData.Person.document_number;
+    let dni = data.studentData.Person.document_number;
     let program = data.studentData.Program.denomination;
+
     let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
+
     let credit = data.studentData.Admission_plan.Plan.credit_required;
+
     let correlative = data.correlative;
     let date = data.date;
+
     let principalOrganicUnit = data.principalOrganicUnit.description;
 
     const pdf = new jsPDF();
+    const imgData = logoUnsm;
+    const imgDataFcs = logoFcs;
+
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
+
+    pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
     pdf.setFontSize(17);
     pdf.setFont("helvetica", "normal");
     pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
@@ -3238,12 +3012,12 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFontSize(16);
     pdf.setFont("helvetica", "normal");
     pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
+    pdf.addImage(imgDataFcs, "JPEG", 169, 14, 28, 28);
 
     pdf.setFontSize(23);
     pdf.setFont("helvetica", "bold");
     pdf.text(
-        "CONSTANCIA DE EGRESO" + " N°" + correlative,
+        "CONSTANCIA DE EGRESADO" + " N°" + correlative,
         pageWidth / 2,
         58,
         "center"
@@ -3276,9 +3050,7 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "El/La estudiante con código (DNI) N° " +
-            codeStudent +
-            ", ha culminado sus estudios en el Programa de " +
+        "Ha culminado sus estudios en el Programa de " +
             program +
             " - Promoción " +
             admissionPlan +
@@ -3286,7 +3058,7 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
             credit +
             " créditos de acuerdo a las Normas y Reglamentos de la " +
             unityName +
-            " y de la " +
+            " de la " +
             universityName +
             ".",
         20,
@@ -3306,7 +3078,7 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
         }
     );
     pdf.text(
-        "Se extiende la presente constancia a petición del interesado/a para los fines que considere conveniente.",
+        "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
         20,
         173,
         {
@@ -3322,6 +3094,7 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
 
     pdf.text("Atentamente", pageWidth / 2, 225, "center");
 
+    
     pdf.line(66, 250, 145, 250);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(11);

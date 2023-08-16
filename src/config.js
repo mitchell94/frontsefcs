@@ -15,5 +15,4 @@ export default {
   entityName: "SEGUNDA ESPECIALIDAD FCS",
   // hostPro: "http://asefcs.test/api/",
   hostPro: "https://asefcs.unsm.edu.pe/api/",
-  
 };

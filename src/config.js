@@ -10,9 +10,9 @@ export default {
   navFixedLayout: true,
   headerFixedLayout: false,
   boxLayout: false,
-  mode: "PRO", //PRO DEV TEST
+  mode: "DEV", //PRO DEV TEST
   entity: 2,
   entityName: "SEGUNDA ESPECIALIDAD FCS",
-  // hostPro: "http://asefcs.test/api/",
-  hostPro: "https://asefcs.unsm.edu.pe/api/",
+  hostPro: "http://asefcs.test/api/",
+  // hostPro: "https://asefcs.unsm.edu.pe/api/",
 };

@@ -1330,28 +1330,11 @@ const pdfReportAutoTableFichaRegistration = async (
     pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
     pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
 
-    // const pdf = new jsPDF();
-    // const imgData = logoUnsm;
-    // const totalPagesExp = "{total_pages_count_string}";
-    // let pageWidth = pdf.internal.pageSize.getWidth();
-    // // let pageHeight = pdf.internal.pageSize.getHeight();
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTIN", 25, 15);
-    // pdf.addImage(imgData, "JPEG", 8, 10, 15, 13);
-    // pdf.setFontSize(10);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text(mastePosgrade, 25, 20);
-
     pdf.setFontSize(23);
     pdf.setFont("helvetica", "bold");
     pdf.text("FICHA DE MATRÍCULA", pageWidth / 2, 58, "center");
     pdf.setLineWidth(0.5);
     pdf.line(20, 59, 190, 59);
-
-    // pdf.setFontSize(12);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("FICHA DE MATRÍCULA", pageWidth / 2, 30, "center");
 
     pdf.setFontSize(10);
     pdf.setFont("helvetica", "bold");
@@ -1361,7 +1344,6 @@ const pdfReportAutoTableFichaRegistration = async (
     let splitTitle = pdf.splitTextToSize(program, 142);
     pdf.text(splitTitle, 47, 70);
 
-    // //
     pdf.setFont("helvetica", "bold");
     pdf.text("UNIDAD", 20, 80);
     pdf.text(":", 44, 80);
@@ -1379,7 +1361,6 @@ const pdfReportAutoTableFichaRegistration = async (
     pdf.text(":", 44, 90);
     pdf.setFont("helvetica", "normal");
     pdf.text(personData.name, 47, 90);
-    // pdf.text(person, 47, 90);
 
     pdf.setFont("helvetica", "bold");
     pdf.text("CÓDIGO/DNI", 20, 95);
@@ -1397,7 +1378,6 @@ const pdfReportAutoTableFichaRegistration = async (
     pdf.text("SEMESTRE", 20, 105);
     pdf.text(":", 44, 105);
     pdf.setFont("helvetica", "normal");
-    // pdf.text(data[i].Academic_semester.Academic_calendar.denomination + '-' + data[i].Academic_semester.denomination, 47, 55);
     pdf.text(process, 47, 105);
 
     let head = [
@@ -4142,65 +4122,67 @@ const pdfReportAutoTableConstancyDisciplinarySeunsm = async (data) => {
 const pdfReportAutoTableRercordAcademic = async (data) => {
     let principalOrganicUnit = data.principalOrganicUnit.description,
         person = data.studentData.Person.name,
+        personDocument = data.studentData.Person.document_number,
         registration = data.registration,
         program = data.studentData.Program.denomination,
         sedeRegistration =
             data.studentData.Program.Organic_unit_register.Campu.denomination.toUpperCase(),
         unitRegistration =
             data.studentData.Program.Organic_unit_register.denomination.toUpperCase();
-    let arrayColumn = [];
-    let columns = [];
 
-    // const pdf = new jsPDF({orientation: "l"});
     const pdf = new jsPDF();
-    const imgData = logoUnsm;
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    // let pageHeight = pdf.internal.pageSize.getHeight();
-    pdf.addImage(imgData, "JPEG", 6, 14, 28, 28);
-    pdf.setFontSize(20);
+
+    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
+    pdf.setFontSize(17);
     pdf.setFont("helvetica", "normal");
+    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
+    pdf.setFontSize(14);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
+    pdf.setFontSize(16);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
+    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
 
-    pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
+    pdf.setFontSize(22);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("RECORD ACADÉMICO", pageWidth / 2, 49, "center");
+    pdf.setLineWidth(0.3);
+    pdf.line(20, 50, 190, 50);
 
-    pdf.setFontSize(18);
-    pdf.text(principalOrganicUnit, pageWidth / 2, 28, "center");
-    // pdf.text('N° 1', 190, 40, {align: 'right'});
-    pdf.setFontSize(24);
-    pdf.setFont("times", "bold");
-    pdf.text("RECORD ACADEMICO", pageWidth / 2, 39, "center");
-    pdf.setLineWidth(0.5);
-
-    let yAxis = 50;
     pdf.setFontSize(10);
     pdf.setFont("helvetica", "bold");
-    pdf.text("PROGRAMA", 10, yAxis);
-    pdf.text(":", 34, yAxis);
-
+    pdf.text("PROGRAMA", 20, 57);
+    pdf.text(":", 44, 57);
     pdf.setFont("helvetica", "normal");
-    // pdf.text(program, 37, 40);
-
-    let splitTitle = pdf.splitTextToSize(program, 160);
-    pdf.text(splitTitle, 37, yAxis);
-
-    //
-    pdf.setFont("helvetica", "bold");
-    pdf.text("UNIDAD", 10, yAxis + 10);
-    pdf.text(":", 34, yAxis + 10);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(unitRegistration, 37, yAxis + 10);
+    let splitProgram = pdf.splitTextToSize(program.toUpperCase(), 142);
+    pdf.text(splitProgram, 47, 57);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("SEDE", 10, yAxis + 15);
-    pdf.text(":", 34, yAxis + 15);
+    pdf.text("UNIDAD", 20, 67);
+    pdf.text(":", 44, 67);
     pdf.setFont("helvetica", "normal");
-    pdf.text(sedeRegistration, 37, yAxis + 15);
+    pdf.text(unitRegistration.toUpperCase(), 47, 67);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("ESTUDIANTE", 10, yAxis + 20);
-    pdf.text(":", 34, yAxis + 20);
+    pdf.text("SEDE", 20, 72);
+    pdf.text(":", 44, 72);
     pdf.setFont("helvetica", "normal");
-    pdf.text(person, 37, yAxis + 20);
+    pdf.text(sedeRegistration, 47, 72);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.text("ESTUDIANTE", 20, 77);
+    pdf.text(":", 44, 77);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(person, 47, 77);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.text("CÓDIGO/DNI", 20, 82);
+    pdf.text(":", 44, 82);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(personDocument, 47, 82);
 
     let totalAprovedCourse = 0;
     let totalAprovedCredit = 0;
@@ -4208,11 +4190,11 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
     let totalCourse = 0;
     let totalCredit = 0;
     let generalPromedi = 0;
-    let initialTableY = 80;
+    let initialTableY = 92;
 
     pdf.setFontSize(7);
     pdf.setFont("helvetica", "normal");
-    pdf.text(moment().format("HH:mm DD/MM/YYYY "), 181, initialTableY - 2);
+    pdf.text(moment().format("HH:mm DD/MM/YYYY "), 171, initialTableY - 2);
     pdf.setFontSize(10);
     let academicSemester = "-";
     if (registration.length > 0) {
@@ -4253,8 +4235,9 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                     parseInt(registration[i].Registration_course[j].note)
                 );
                 tempBody.push([
-                    registration[i].Registration_course[j].id,
+                    registration[i].Registration_course[j].code,
                     registration[i].Registration_course[j].denomination,
+                    registration[i].Registration_course[j].ciclo,
                     "NN",
                     "",
                     typeCourse,
@@ -4265,7 +4248,7 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                 ]);
             }
             pdf.setFont("helvetica", "bold");
-            pdf.text("SEMESTRE", 10, initialTableY - 2);
+            pdf.text("SEMESTRE", 20, initialTableY - 2);
             pdf.setFont("helvetica", "normal");
             academicSemester = registration[i].Academic_semester.denomination;
 
@@ -4274,11 +4257,11 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                     .denomination +
                     " - " +
                     academicSemester,
-                37,
+                47,
                 initialTableY - 2
             );
             pdf.autoTable({
-                margin: [28, 10],
+                margin: [28, 20],
                 theme: "grid",
                 styles: { fontSize: 7, font: "helvetica", fontStyle: "normal" },
                 headStyles: {
@@ -4287,16 +4270,29 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                     fillColor: "#000",
                 },
                 columnStyles: {
-                    0: { cellWidth: 15 },
-                    1: { cellWidth: 119 },
-                    2: { cellWidth: 7 },
-                    3: { cellWidth: 8 },
-                    4: { cellWidth: 8 },
-                    5: { cellWidth: 8 },
-                    6: { cellWidth: 25 },
+                    0: { cellWidth: 20 },
+                    // 1: { cellWidth: 111 },
+                    2: { cellWidth: 7, halign: "center" },
+                    3: { cellWidth: 7, halign: "center" },
+                    4: { cellWidth: 7, halign: "center" },
+                    5: { cellWidth: 7, halign: "center" },
+                    6: { cellWidth: 7, halign: "center" },
+                    7: { cellWidth: 23 },
                 },
                 startY: initialTableY,
-                head: [["CODIGO", "CURSO", "CV", "TN", "TC", "CR", "NOTA"]],
+                head: [
+                    [
+                        "CÓDIGO",
+                        "CURSO",
+                        { content: "CL", styles: { halign: "center" } },
+                        { content: "CV", styles: { halign: "center" } },
+                        { content: "TN", styles: { halign: "center" } },
+                        { content: "TC", styles: { halign: "center" } },
+                        { content: "CR", styles: { halign: "center" } },
+                        "NOTA",
+                    ],
+                ],
+
                 body: tempBody,
             });
             initialTableY = pdf.lastAutoTable.finalY + 10;
@@ -4305,42 +4301,42 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
     }
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("TOTAL CURSOS", 10, initialTableY + 15);
-    pdf.text(":", 50, initialTableY + 15);
+    pdf.text("TOTAL CURSOS", 20, initialTableY + 10);
+    pdf.text(":", 60, initialTableY + 10);
     pdf.setFont("helvetica", "normal");
-    pdf.text(String(totalCourse), 52, initialTableY + 15);
+    pdf.text(String(totalCourse), 62, initialTableY + 10);
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("TOTAL CREDITOS", 10, initialTableY + 20);
-    pdf.text(":", 50, initialTableY + 20);
+    pdf.text("TOTAL CRÉDITOS", 20, initialTableY + 15);
+    pdf.text(":", 60, initialTableY + 15);
     pdf.setFont("helvetica", "normal");
-    pdf.text(String(totalCredit), 52, initialTableY + 20);
+    pdf.text(String(totalCredit), 62, initialTableY + 15);
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("PROMEDIO GENERAL", 10, initialTableY + 25);
-    pdf.text(":", 50, initialTableY + 25);
+    pdf.text("PROMEDIO GENERAL", 20, initialTableY + 20);
+    pdf.text(":", 60, initialTableY + 20);
     pdf.setFont("helvetica", "normal");
     pdf.text(
         String(Math.round((generalPromedi / totalCourse) * 100) / 100),
-        52,
-        initialTableY + 25
+        62,
+        initialTableY + 20
     );
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("TOTAL DE CURSOS APROBADOS", 110, initialTableY + 15);
+    pdf.text("TOTAL DE CURSOS APROBADOS", 110, initialTableY + 10);
+    pdf.text(":", 173, initialTableY + 10);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(String(totalAprovedCourse), 175, initialTableY + 10);
+
+    pdf.setFont("helvetica", "normal");
+    pdf.text("TOTAL DE CRÉDITOS APROBADOS", 110, initialTableY + 15);
     pdf.text(":", 173, initialTableY + 15);
     pdf.setFont("helvetica", "normal");
-    pdf.text(String(totalAprovedCourse), 175, initialTableY + 15);
+    pdf.text(String(totalAprovedCredit), 175, initialTableY + 15);
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("TOTAL DE CREDITOS APROBADOS", 110, initialTableY + 20);
-    pdf.text(":", 173, initialTableY + 20);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(String(totalAprovedCredit), 175, initialTableY + 20);
-
-    pdf.setFont("helvetica", "normal");
-    pdf.text("PROMEDIO CR. APR..", 110, initialTableY + 25);
-    pdf.text(":", 173, initialTableY + 25);
+    pdf.text("PROMEDIO CR. APROBADOS", 110, initialTableY  + 20);
+    pdf.text(":", 173, initialTableY  + 20);
     pdf.setFont("helvetica", "normal");
     pdf.text(
         String(
@@ -4349,20 +4345,19 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                 : 0
         ),
         175,
-        initialTableY + 25
+        initialTableY + 20
     );
     pdf.setFontSize(8);
     pdf.setFont("helvetica", "normal");
-    pdf.text("Leyenda :", 10, initialTableY + 40);
-    pdf.text("TN : Tipo de nota", 30, initialTableY + 40);
+    pdf.text("CL: Ciclo", 20, initialTableY + 30);
+    pdf.text("CV: Curso Convalidado(C)", 40, initialTableY + 30);
+    pdf.text("TN: Tipo de nota", 80, initialTableY + 30);
     pdf.text(
-        "TC : Tipo de curso(O=Obligatorio, E=Electivo)",
-        55,
-        initialTableY + 40
+        "TC: Tipo de curso(O=Obligatorio, E=Electivo)",
+        110,
+        initialTableY + 30
     );
-    pdf.text("CR : Nro.Cred x Curso", 118, initialTableY + 40);
-    pdf.text("CV : Curso Convalidado(C)", 150, initialTableY + 40);
-    // pdf.text("FECHA :", 170, finalTable);
+    pdf.text("CR: Créditos", 173, initialTableY + 30);
 
     const pageCount = pdf.internal.getNumberOfPages();
 
@@ -4382,6 +4377,243 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
 
     pdf.save("RECORD-ACADEMICO-" + person + ".pdf");
 };
+
+// const pdfReportAutoTableRercordAcademic = async (data) => {
+//     let principalOrganicUnit = data.principalOrganicUnit.description,
+//         person = data.studentData.Person.name,
+//         registration = data.registration,
+//         program = data.studentData.Program.denomination,
+//         sedeRegistration =
+//             data.studentData.Program.Organic_unit_register.Campu.denomination.toUpperCase(),
+//         unitRegistration =
+//             data.studentData.Program.Organic_unit_register.denomination.toUpperCase();
+
+//     const pdf = new jsPDF();
+//     const imgData = logoUnsm;
+//     const totalPagesExp = "{total_pages_count_string}";
+//     let pageWidth = pdf.internal.pageSize.getWidth();
+//     pdf.addImage(imgData, "JPEG", 6, 14, 28, 28);
+//     pdf.setFontSize(20);
+//     pdf.setFont("helvetica", "normal");
+
+//     pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
+
+//     pdf.setFontSize(18);
+//     pdf.text(principalOrganicUnit, pageWidth / 2, 28, "center");
+//     pdf.setFontSize(24);
+//     pdf.setFont("times", "bold");
+//     pdf.text("RECORD ACADEMICOFFFF", pageWidth / 2, 39, "center");
+//     pdf.setLineWidth(0.5);
+
+//     let yAxis = 50;
+//     pdf.setFontSize(10);
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("PROGRAMA", 10, yAxis);
+//     pdf.text(":", 34, yAxis);
+
+//     pdf.setFont("helvetica", "normal");
+
+//     let splitTitle = pdf.splitTextToSize(program, 160);
+//     pdf.text(splitTitle, 37, yAxis);
+
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("UNIDAD", 10, yAxis + 10);
+//     pdf.text(":", 34, yAxis + 10);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(unitRegistration, 37, yAxis + 10);
+
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("SEDE", 10, yAxis + 15);
+//     pdf.text(":", 34, yAxis + 15);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(sedeRegistration, 37, yAxis + 15);
+
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("ESTUDIANTE", 10, yAxis + 20);
+//     pdf.text(":", 34, yAxis + 20);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(person, 37, yAxis + 20);
+
+//     let totalAprovedCourse = 0;
+//     let totalAprovedCredit = 0;
+//     let aprovedPromedi = 0;
+//     let totalCourse = 0;
+//     let totalCredit = 0;
+//     let generalPromedi = 0;
+//     let initialTableY = 80;
+
+//     pdf.setFontSize(7);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(moment().format("HH:mm DD/MM/YYYY "), 181, initialTableY - 2);
+//     pdf.setFontSize(10);
+//     let academicSemester = "-";
+//     if (registration.length > 0) {
+//         for (let i = 0; i < registration.length; i++) {
+//             let tempBody = [];
+//             for (
+//                 let j = 0;
+//                 j < registration[i].Registration_course.length;
+//                 j++
+//             ) {
+//                 let typeCourse =
+//                     registration[i].Registration_course[j].type_course ===
+//                     "Obligatorio"
+//                         ? "O"
+//                         : "E";
+//                 totalCourse = totalCourse + 1;
+//                 totalCredit =
+//                     totalCredit +
+//                     registration[i].Registration_course[j].credits;
+//                 generalPromedi =
+//                     generalPromedi +
+//                     registration[i].Registration_course[j].note;
+//                 totalAprovedCourse =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? totalAprovedCourse + 1
+//                         : totalAprovedCourse;
+//                 aprovedPromedi =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? aprovedPromedi +
+//                           registration[i].Registration_course[j].note
+//                         : aprovedPromedi;
+//                 totalAprovedCredit =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? totalAprovedCredit +
+//                           registration[i].Registration_course[j].credits
+//                         : totalAprovedCredit;
+//                 let noteText = numberToLetter(
+//                     parseInt(registration[i].Registration_course[j].note)
+//                 );
+//                 tempBody.push([
+//                     registration[i].Registration_course[j].id,
+//                     registration[i].Registration_course[j].denomination,
+//                     "NN",
+//                     "",
+//                     typeCourse,
+//                     registration[i].Registration_course[j].credits,
+//                     registration[i].Registration_course[j].note +
+//                         " " +
+//                         noteText,
+//                 ]);
+//             }
+//             pdf.setFont("helvetica", "bold");
+//             pdf.text("SEMESTRE", 10, initialTableY - 2);
+//             pdf.setFont("helvetica", "normal");
+//             academicSemester = registration[i].Academic_semester.denomination;
+
+//             pdf.text(
+//                 registration[i].Academic_semester.Academic_calendar
+//                     .denomination +
+//                     " - " +
+//                     academicSemester,
+//                 37,
+//                 initialTableY - 2
+//             );
+//             pdf.autoTable({
+//                 margin: [28, 10],
+//                 theme: "grid",
+//                 styles: { fontSize: 7, font: "helvetica", fontStyle: "normal" },
+//                 headStyles: {
+//                     font: "helvetica",
+//                     fontStyle: "bold",
+//                     fillColor: "#000",
+//                 },
+//                 columnStyles: {
+//                     0: { cellWidth: 15 },
+//                     1: { cellWidth: 119 },
+//                     2: { cellWidth: 7 },
+//                     3: { cellWidth: 8 },
+//                     4: { cellWidth: 8 },
+//                     5: { cellWidth: 8 },
+//                     6: { cellWidth: 25 },
+//                 },
+//                 startY: initialTableY,
+//                 head: [["CODIGO", "CURSO", "CV", "TN", "TC", "CR", "NOTA"]],
+//                 body: tempBody,
+//             });
+//             initialTableY = pdf.lastAutoTable.finalY + 10;
+//         }
+//         initialTableY = pdf.lastAutoTable.finalY;
+//     }
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL CURSOS", 10, initialTableY + 15);
+//     pdf.text(":", 50, initialTableY + 15);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalCourse), 52, initialTableY + 15);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL CREDITOS", 10, initialTableY + 20);
+//     pdf.text(":", 50, initialTableY + 20);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalCredit), 52, initialTableY + 20);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("PROMEDIO GENERAL", 10, initialTableY + 25);
+//     pdf.text(":", 50, initialTableY + 25);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         String(Math.round((generalPromedi / totalCourse) * 100) / 100),
+//         52,
+//         initialTableY + 25
+//     );
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL DE CURSOS APROBADOS", 110, initialTableY + 15);
+//     pdf.text(":", 173, initialTableY + 15);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalAprovedCourse), 175, initialTableY + 15);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL DE CREDITOS APROBADOS", 110, initialTableY + 20);
+//     pdf.text(":", 173, initialTableY + 20);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalAprovedCredit), 175, initialTableY + 20);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("PROMEDIO CR. APR..", 110, initialTableY + 25);
+//     pdf.text(":", 173, initialTableY + 25);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         String(
+//             totalAprovedCourse !== 0
+//                 ? Math.round((aprovedPromedi / totalAprovedCourse) * 100) / 100
+//                 : 0
+//         ),
+//         175,
+//         initialTableY + 25
+//     );
+//     pdf.setFontSize(8);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("Leyenda :", 10, initialTableY + 40);
+//     pdf.text("TN : Tipo de nota", 30, initialTableY + 40);
+//     pdf.text(
+//         "TC : Tipo de curso(O=Obligatorio, E=Electivo)",
+//         55,
+//         initialTableY + 40
+//     );
+//     pdf.text("CR : Nro.Cred x Curso", 118, initialTableY + 40);
+//     pdf.text("CV : Curso Convalidado(C)", 150, initialTableY + 40);
+
+//     const pageCount = pdf.internal.getNumberOfPages();
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.setFontSize(8);
+//     for (let i = 1; i <= pageCount; i++) {
+//         pdf.setPage(i);
+//         pdf.text("Pag " + String(i) + " de " + String(pageCount), 197, 287, {
+//             align: "right",
+//         });
+//     }
+
+//     // Total page number plugin only available in jspdf v1.0+
+//     if (typeof pdf.putTotalPages === "function") {
+//         pdf.putTotalPages(totalPagesExp);
+//     }
+
+//     pdf.save("RECORD-ACADEMICO-" + person + ".pdf");
+// };
+
 const pdfReportAutoTableStudyPlan = async (data) => {
     console.log(data);
     let principalOrganicUnit = data.principalOrganicUnit.description,
@@ -4767,6 +4999,7 @@ const pdfReportAutoTableActaEvaluation = async (
     }
     pdf.save(program + ".pdf");
 };
+
 const pdfReportAutoTableActa = async (record) => {
     let principalOrganicUnit = record.principalOrganicUnit.description,
         facultad = record.faculty,
@@ -4782,86 +5015,97 @@ const pdfReportAutoTableActa = async (record) => {
         totalStudent = record.totalStudent,
         approvedStudent = record.approvedStudent,
         desaprovedStudent = record.desaprovedStudent,
-        data = record.students;
+        data = record.students,
+        // MPT
+        ciclo = record.ciclo;
 
     const pdf = new jsPDF();
-    const imgData = logoUnsm;
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    // let pageHeight = pdf.internal.pageSize.getHeight();
-    pdf.addImage(imgData, "JPEG", 6, 14, 28, 28);
-    pdf.setFontSize(20);
+
+    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
+    pdf.setFontSize(17);
     pdf.setFont("helvetica", "normal");
+    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
+    pdf.setFontSize(14);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
+    pdf.setFontSize(16);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
+    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
 
-    pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
+    pdf.setFontSize(22);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("ACTA DE EVALUACIÓN " + semester, pageWidth / 2, 46, "center");
+    pdf.setLineWidth(0.3);
+    pdf.line(20, 47, 190, 47);
 
-    pdf.setFontSize(18);
-    pdf.text(principalOrganicUnit, pageWidth / 2, 28, "center");
-    // pdf.text('N° 1', 190, 40, {align: 'right'});
-    pdf.setFontSize(24);
-    pdf.setFont("times", "bold");
-    pdf.text("ACTA DE EVALUACION " + semester, pageWidth / 2, 39, "center");
-    pdf.line(40, 40, 173, 40);
-    pdf.setLineWidth(0.5);
     pdf.setFontSize(10);
     pdf.setFont("helvetica", "bold");
-    pdf.text("CODIGO", 10, 50);
-    pdf.text(":", 34, 50);
+    pdf.text("CÓDIGO", 20, 52);
+    pdf.text(":", 44, 52);
     pdf.setFont("helvetica", "normal");
-    pdf.text(correlative, 37, 50);
-    let yAxis = 55;
+    pdf.text(correlative, 47, 52);
+
+    pdf.setFontSize(10);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("PROGRAMA", 20, 57);
+    pdf.text(":", 44, 57);
+    pdf.setFont("helvetica", "normal");
+    let splitTitle = pdf.splitTextToSize(program, 142);
+    pdf.text(splitTitle, 47, 57);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("PROGRAMA", 10, yAxis);
-    pdf.text(":", 34, yAxis);
-
+    pdf.text("FACULTAD", 20, 67);
+    pdf.text(":", 44, 67);
     pdf.setFont("helvetica", "normal");
-    let splitTitle = pdf.splitTextToSize(program, 160);
-    pdf.text(splitTitle, 37, yAxis);
+    pdf.text(facultad.toUpperCase(), 47, 67);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("FACULTAD", 10, yAxis + 10);
-    pdf.text(":", 34, yAxis + 10);
+    pdf.text("SEDE", 20, 72);
+    pdf.text(":", 44, 72);
     pdf.setFont("helvetica", "normal");
-    pdf.text(facultad, 37, yAxis + 10);
+    pdf.text(sede, 47, 72);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("SEDE", 10, yAxis + 15);
-    pdf.text(":", 34, yAxis + 15);
+    pdf.text("ASIGNATURA", 20, 77);
+    pdf.text(":", 44, 77);
     pdf.setFont("helvetica", "normal");
-    pdf.text(sede, 37, yAxis + 15);
+    let splitCourse = pdf.splitTextToSize(course, 142);
+    pdf.text(splitCourse, 47, 77);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("ASIGNATURA", 10, yAxis + 20);
-    pdf.text(":", 34, yAxis + 20);
+    pdf.text("CICLO", 20, 82);
+    pdf.text(":", 44, 82);
     pdf.setFont("helvetica", "normal");
-    pdf.text(course, 37, yAxis + 20);
+    pdf.text(ciclo, 47, 82);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("CREDITOS", 10, yAxis + 25);
-    pdf.text(":", 34, yAxis + 25);
+    pdf.text("CRÉDITOS :", 60, 82);
     pdf.setFont("helvetica", "normal");
-    pdf.text(String(credit), 37, yAxis + 25);
+    pdf.text(String(credit), 82, 82);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("TIPO CURSO :", 59, yAxis + 25);
+    pdf.text("TIPO CURSO :", 97, 82);
     pdf.setFont("helvetica", "normal");
-    pdf.text(typeCourse, 84, yAxis + 25);
+    pdf.text(typeCourse, 123, 82);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("DOCENTE RESPONSABLE :", 10, yAxis + 30);
+    pdf.text("DOCENTE RESPONSABLE :", 20, 87);
     pdf.setFont("helvetica", "normal");
-    pdf.text(teacher, 59, yAxis + 30);
+    let splitTeacher = pdf.splitTextToSize(teacher, 80);
+    pdf.text(splitTeacher, 69, 87);
 
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(8);
-    pdf.setLineDash([2.5]);
-    pdf.line(145, yAxis + 27, 195, yAxis + 27);
-    pdf.text("FIRMA DOCENTE", 159, yAxis + 30);
+    pdf.setLineDash([2]);
+    pdf.line(153, 87, 189, 87);
+    pdf.text("FIRMA DOCENTE", 159, 90);
     pdf.setLineDash([0]);
 
     pdf.autoTable({
-        margin: [28, 10],
+        margin: [28, 20],
         theme: "grid",
         styles: {
             fontSize: 9,
@@ -4873,41 +5117,47 @@ const pdfReportAutoTableActa = async (record) => {
             fontStyle: "bold",
             fillColor: "#000",
         },
-        startY: yAxis + 35,
+        startY: 95,
         head: [
-            ["#", "APELLIDOS Y NOMBRES", "CODIGO", "NOTA LETRA", "NOTA NÚMERO"],
+            ["#", "APELLIDOS Y NOMBRES", "CÓDIGO", "NOTA LETRA", "NOTA NÚMERO"],
         ],
         body: data,
     });
 
-    let finalTable = pdf.lastAutoTable.finalY + 10;
-    pdf.setFontSize(10);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("1 . ORIGINAL :", 10, finalTable);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text("OCRA", 35, finalTable);
+    let finalTable = pdf.lastAutoTable.finalY;
+
+    let freeY1 = (297 - finalTable).toString();
+    if (freeY1 < 40) {
+        pdf.addPage();
+        finalTable = 9;
+    }
+
+    pdf.setFontSize(9);
     pdf.setFont("helvetica", "bold");
-    pdf.text("1 . ORIGINAL :", 10, finalTable + 5);
+    pdf.text("1 . ORIGINAL :", 20, finalTable + 10);
     pdf.setFont("helvetica", "normal");
-    pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable + 5);
+    pdf.text(principalOrganicUnit.toUpperCase(), 45, finalTable + 10);
+
     pdf.setFont("helvetica", "bold");
-    pdf.text("2 . COPIA", 10, finalTable + 10);
-    pdf.text(":", 33, finalTable + 10);
+    pdf.text("2 . COPIA", 20, finalTable + 15);
+    pdf.text(":", 43, finalTable + 15);
     pdf.setFont("helvetica", "normal");
-    pdf.text("URT/PC", 35, finalTable + 10);
+    pdf.text("URT/PC", 45, finalTable + 15);
+
     pdf.setFont("helvetica", "bold");
-    pdf.text("3 . COPIA", 10, finalTable + 15);
-    pdf.text(":", 33, finalTable + 15);
+    pdf.text("3 . COPIA", 20, finalTable + 20);
+    pdf.text(":", 43, finalTable + 20);
     pdf.setFont("helvetica", "normal");
-    pdf.text("PROFESOR DEL CURSO", 35, finalTable + 15);
+    pdf.text("PROFESOR DEL CURSO", 45, finalTable + 20);
+
     pdf.setFont("helvetica", "bold");
-    pdf.text("FECHA :", 165, finalTable + 15);
+    pdf.text("FECHA :", 157, finalTable + 20);
     pdf.setFont("helvetica", "normal");
-    pdf.text(moment(actaDate).format("DD/MM/YYYY "), 180, finalTable + 15);
+    pdf.text(moment(actaDate).format("DD/MM/YYYY "), 172, finalTable + 20);
 
     pdf.autoTable({
-        margin: [10, 10],
-        startY: finalTable + 20,
+        margin: [10, 20],
+        startY: finalTable + 25,
         theme: "grid",
         styles: {
             fontSize: 9,
@@ -4923,7 +5173,7 @@ const pdfReportAutoTableActa = async (record) => {
         tableWidth: 61,
         head: [["RESUMEN", "N°", "%"]],
         body: [
-            ["Alumnos Matrículados", totalStudent, "100"],
+            ["Alumnos Matriculados", totalStudent, "100"],
             [
                 "Alumnos Aprobados",
                 approvedStudent,
@@ -4936,16 +5186,25 @@ const pdfReportAutoTableActa = async (record) => {
             ],
         ],
     });
-    let finalTable2 = pdf.lastAutoTable.finalY;
+
+    let finalTable2 = pdf.lastAutoTable.finalY + 5;
+
+    let freeY2 = (297 - finalTable2).toString();
+    if (freeY2 < 40) {
+        pdf.addPage();
+        finalTable2 = 9;
+    }
+
     pdf.setFont("helvetica", "bold");
     pdf.setDrawColor(0, 0, 0);
     pdf.setFontSize(8);
-    pdf.setLineDash([2.5]);
-    pdf.line(10, finalTable2 + 25, 70, finalTable2 + 25);
-    pdf.text("V°,B' Tecnico", 30, finalTable2 + 28);
+    pdf.setLineDash([2]);
 
-    pdf.line(160, finalTable2 + 25, 200, finalTable2 + 25);
-    pdf.text("Fecha de Recepción", 130, finalTable2 + 25);
+    pdf.line(20, finalTable2 + 25, 65, finalTable2 + 25);
+    pdf.text("V°,B' Técnico", 30, finalTable2 + 28);
+
+    pdf.text("Fecha de Recepción:", 130, finalTable2 + 25);
+    pdf.line(160, finalTable2 + 25, 190, finalTable2 + 25);
     pdf.setLineDash([0]);
 
     const pageCount = pdf.internal.getNumberOfPages();

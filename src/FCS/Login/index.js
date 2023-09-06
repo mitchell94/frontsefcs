@@ -77,8 +77,6 @@ class Login extends React.Component {
             case 'pass':
                 this.setState({pass: event.target.value.replace(/[^A-Za-záéíóúÁÉÍÓÚÜ/0-9]/g, '')});
                 break;
-
-
             default:
                 break;
         }
@@ -142,7 +140,7 @@ class Login extends React.Component {
         // localStorage.setItem('SESSION_ID', _session);
 
 
-        window.location.href = '/';
+        window.location.href = '/admin/';
 
     };
 

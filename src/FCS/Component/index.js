@@ -5142,22 +5142,28 @@ const pdfReportAutoTableActa = async (record) => {
     pdf.text("2 . COPIA", 20, finalTable + 15);
     pdf.text(":", 43, finalTable + 15);
     pdf.setFont("helvetica", "normal");
-    pdf.text("URT/PC", 45, finalTable + 15);
+    pdf.text(principalOrganicUnit.toUpperCase(), 45, finalTable + 15);
 
     pdf.setFont("helvetica", "bold");
     pdf.text("3 . COPIA", 20, finalTable + 20);
     pdf.text(":", 43, finalTable + 20);
     pdf.setFont("helvetica", "normal");
-    pdf.text("PROFESOR DEL CURSO", 45, finalTable + 20);
+    pdf.text("OAA", 45, finalTable + 20);
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("FECHA :", 157, finalTable + 20);
+    pdf.text("4 . COPIA", 20, finalTable + 25);
+    pdf.text(":", 43, finalTable + 25);
     pdf.setFont("helvetica", "normal");
-    pdf.text(moment(actaDate).format("DD/MM/YYYY "), 172, finalTable + 20);
+    pdf.text("DOCENTE DEL CURSO", 45, finalTable + 25);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.text("FECHA :", 157, finalTable + 25);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(moment(actaDate).format("DD/MM/YYYY "), 172, finalTable + 25);
 
     pdf.autoTable({
         margin: [10, 20],
-        startY: finalTable + 25,
+        startY: finalTable + 30,
         theme: "grid",
         styles: {
             fontSize: 9,

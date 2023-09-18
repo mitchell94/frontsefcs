@@ -4,7 +4,8 @@ const MODE = config.mode;
 let host = "";
 let headers = "";
 if (MODE === "DEV") {
-    host = 'http://asefcs.test/api/';
+    // host = 'http://asefcs.test/api/';
+    host = 'http://localhost:8899/api/';
     headers = {
         headers: {'Content-Type': 'multipart/form-data', 'x-accesss-token': localStorage.getItem('TOKEN') || null}
     };

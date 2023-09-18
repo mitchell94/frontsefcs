@@ -1806,69 +1806,34 @@ const pdfReportAutoTableCertStudy2 = async (data) => {
 
     pdf.save("CERTIFICADO-ESTUDIOS-" + student + ".pdf");
 };
+
 const pdfReportAutoTableCertStudySeunsm = async (data) => {
     let student = data.studentData.Person.name;
     let photo = data.studentData.Person.photo;
     let dni = data.studentData.Person.document_number;
     let program = data.studentData.Program.denomination;
-    let certyDescription = data.principalOrganicUnit.description_document;
-
     let totalCredit = data.totalCredit;
     let averageScore = data.averageScore;
     let observation = data.observation;
     let correlative = data.correlative;
     let date = data.date;
     let record = data.dataRegistration;
-
     let principalOrganicUnit = data.principalOrganicUnit.description;
     let certyAbbreviation = data.principalOrganicUnit.abbreviation;
     let authorityTypeAname = data.authorityTypeA.person;
     let authorityTypeAcharge = data.authorityTypeA.charge;
     let authorityTypeGname = data.authorityTypeG.person;
     let authorityTypeGcharge = data.authorityTypeG.charge;
-
     const pdf = new jsPDF();
-
-    // pdf.setFontSize(4);
-    // pdf.setTextColor(193, 242, 230)
-    // let waterMark = 0;
-    // for (let i = 0; i < 300; i++) {
-    //
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 0, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 29, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 58, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 87, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 116, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 145, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 174, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 203, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 232, waterMark);
-    //     pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', 261, waterMark);
-    //     waterMark = waterMark + 1.3;
-    // }
-
     pdf.setTextColor(12, 13, 14);
     const imgData = logoUnsm;
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
     let pageHeight = pdf.internal.pageSize.getHeight();
-    // pdf.addImage(imgData, 'JPEG', 7, 14, 28, 28);
-    //
-    // // pdf.addImage(logoEpg2, 'JPEG', 175, 14, 27, 26);
-    // pdf.setFontSize(15);
-    // pdf.text("SEGUNDA ESPECIALIDAD", pageWidth / 2, 35, 'center');
-    //
-    //
-    // pdf.setFontSize(20);
-    // pdf.setFont('helvetica', 'normal');
-    //
-    // pdf.text('UNIVERSIDAD NACIONAL DE SAN MARTÍN', pageWidth / 2, 20, 'center');
-
     pdf.setFontSize(22);
     pdf.setFont("helvetica", "normal");
-
     let textoCompleto =
-        "La Oficina de Asuntos Académicos de la Universidad Nacional de San Martín, " +
+        "La Dirección de Asuntos Académicos de la Universidad Nacional de San Martín, " +
         "**CERTIFICA**" +
         " que " +
         "**" +
@@ -1886,36 +1851,23 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
 
     pdf.setFontSize(19);
     pdf.setFont("times", "bold");
-    pdf.text(
-        "CERTIFICADO DE ESTUDIOS N°" + correlative,
-        pageWidth / 2,
-        42,
-        "center"
-    );
+    pdf.text("CERTIFICADO DE ESTUDIOS N° " + correlative, pageWidth / 2, 42, "center");
     pdf.setLineWidth(0.5);
-    // pdf.line(40, 41, 175, 41);
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
-    //DESDE AQUI
     let startY = 52;
     let startX = 10;
-
     const fontSize = 4;
     const lineSpacing = 6;
-
-    const regex = /(\*{2})+/g; // all "**" words
+    const regex = /(\*{2})+/g;
     const textWithoutBoldMarks = textoCompleto.replace(regex, "");
-
     let splitTextWithoutBoldMarks = pdf.splitTextToSize(
         textWithoutBoldMarks,
         199
     );
-
     let charsMapLength = 0;
     let position = 0;
     let isBold = false;
-    // <><>><><>><>><><><><><>>><><<><><><><>
-
     const printCharacters = (
         doc,
         textObject,
@@ -1927,7 +1879,6 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
         const startXCached = startX;
         const boldStr = "bold";
         const normalStr = "normal";
-
         textObject.map((row) => {
             Object.entries(row).map(([key, value]) => {
                 pdf.setFont("helvetica", value.bold ? boldStr : normalStr);
@@ -1939,45 +1890,29 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
             startY += lineSpacing;
         });
     };
-    // power algorithm to determine which char is bold
     let textRows = splitTextWithoutBoldMarks.map((row, i) => {
         const charsMap = row.split("");
-
         const chars = charsMap.map((char, j) => {
             position = charsMapLength + j + i;
-
             let currentChar = textoCompleto.charAt(position);
-
             if (currentChar === "*") {
                 const spyNextChar = textoCompleto.charAt(position + 1);
                 if (spyNextChar === "*") {
-                    // double asterix marker exist on these position's so we toggle the bold state
                     isBold = !isBold;
                     currentChar = textoCompleto.charAt(position + 2);
-
-                    // now we remove the markers, so loop jumps to the next real printable char
                     let removeMarks = textoCompleto.split("");
                     removeMarks.splice(position, 2);
                     textoCompleto = removeMarks.join("");
                 }
             }
-
             return { char: currentChar, bold: isBold };
         });
         charsMapLength += charsMap.length;
-
         return { ...chars };
     });
     printCharacters(pdf, textRows, startY, startX, fontSize, lineSpacing);
-
-    //HASTA AQUI
-    // pdf.text(textoCompleto, 10, 50, {
-    //     maxWidth: 190,
-    //     align: 'justify'
-    // });
     pdf.setFontSize(10);
     pdf.setFont("times", "bold");
-    // pdf.text('N' + correlative, 184, 70);
     let header = [["ASIGNATURA", "CREDITOS", "CALIFICACIONES", "AÑO"]];
     pdf.autoTable({
         margin: [{ left: 10, right: 10, bottom: 5 }],
@@ -2001,37 +1936,16 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
             font: "helvetica",
             fontSize: 8,
             lineColor: [0, 0, 0],
-            lineWidth: 0.5, // fillColor: [0, 0, 0],
-            // fontSize: 15,
+            lineWidth: 0.5,
         },
 
         bodyStyles: {
-            // fillColor70,
-            // lineWidth: 0.5,
             font: "helvetica",
             fontSize: 7,
         },
         willDrawCell: (data) => {
             if (data.section === "body") {
-                // console.log(data.cell.raw)
-                // if (data.row.index === 0 && data.column.index === 0) {
-                //
-                //     let endIndex = data.cell.raw.indexOf('/');
-                //     let boldText = data.cell.raw.substring(0, endIndex);
-                //     let normalText = data.cell.raw.substring(endIndex);
-                //     // console.log("boldText is  " + boldText + "  normalText is  " + normalText);
-                //     // data.cell.raw = '<b>'+boldText+'</b>'+normalText;
-                //
-                //
-                //     // data.cell.text = '<b>' + boldText + '</b>' + normalText;
-                //
-                //     console.log("after data cell iss  ");
-                //     console.log('<b>' + data.cell.raw + '</b>');
-                //
-                // }
-
                 let text = String(data.cell.raw);
-
                 if (text.indexOf("CICLO") >= 0) {
                     pdf.setFont("helvetica", "bold");
                     data.cell.text = data.cell.raw;
@@ -2042,15 +1956,12 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
         head: header,
         body: record,
     });
-
     let finalTable = pdf.lastAutoTable.finalY + 5;
-
     pdf.setFontSize(8);
     pdf.setFont("helvetica", "bold");
     pdf.text("TOTAL DE CREDITOS :", 12, finalTable - 1);
     pdf.text("PROMEDIO PONDERADO :", 140.6, finalTable - 1);
     pdf.text("OBSERVACIONES :", 12, finalTable + 6);
-
     pdf.setFontSize(9);
     pdf.setFont("helvetica", "normal");
     pdf.text(String(totalCredit), 47, finalTable - 1);
@@ -2059,49 +1970,34 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
         maxWidth: 158,
         align: "justify",
     });
-
     pdf.setLineWidth(0.5);
-
-    //LINEAS DENTRO DE LA TABLA
-    // pdf.line(118.9, 80, 118.9, finalTable - 5);
     pdf.line(133, 76, 133, finalTable - 5);
     pdf.line(154.56, 76, 154.56, finalTable - 5);
     pdf.line(187.8, 76, 187.8, finalTable - 5);
-
-    //FINAL DE LA TABLA LINEAS
-    //primera linea horizontal
     pdf.setLineWidth(1);
     pdf.line(10, finalTable + 2, 200, finalTable + 1);
     pdf.line(10, finalTable + 12, 200, finalTable + 12);
     let falta = 289 - finalTable;
-    //Lateral izauierdo
     pdf.line(10, finalTable - 5, 10, finalTable + falta);
-    //Lateral derecho
     pdf.line(200, finalTable - 5, 200, finalTable + falta);
-    //Linera Final
     pdf.line(10, 288.5, 200, 288.5);
     if (finalTable >= 220) {
         pdf.addPage();
         finalTable = 10;
         pdf.setLineWidth(1);
-        //Lateral izauierdo
         pdf.line(10, finalTable - 0.5, 10, finalTable + 70.5);
-        //Lateral derecho
         pdf.line(200, finalTable - 0.5, 200, finalTable + 70.5);
         pdf.line(10, 10, 200, 10); //1 horizontal
         pdf.line(10, 80, 200, 80);
     }
-
     let imgUrl = app.server + "photo/" + photo;
     let imgPhoto = await getDataUri(imgUrl);
     pdf.addImage(imgPhoto, "JPEG", 12, finalTable + 25, 33, 40);
     pdf.setLineWidth(0.5);
-    //CUADRO DE FOTO
     pdf.line(12, finalTable + 25, 45, finalTable + 25); //1 horizontal
     pdf.line(12, finalTable + 65, 45, finalTable + 65); //2 horizontal
     pdf.line(12.2, finalTable + 25, 12.2, finalTable + 65); //1 vertical
     pdf.line(44.8, finalTable + 25, 44.8, finalTable + 65); //2 vertical
-
     pdf.setFontSize(8);
     pdf.text(
         "Así consta en las actas, de la " +
@@ -2119,23 +2015,18 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
     pdf.setFontSize(9);
     pdf.setFont("helvetica", "bold");
     pdf.text("Tarapoto " + date, 140, finalTable + 22);
-
     pdf.setFontSize(7);
     pdf.setLineWidth(0.5);
-    //FIRTS AUTORITY
     pdf.line(50, finalTable + 48, 98, finalTable + 48);
     pdf.setFont("helvetica", "bold");
     pdf.text(authorityTypeGname, 50, finalTable + 51);
     pdf.setFont("helvetica", "normal");
     pdf.text(authorityTypeGcharge, 50, finalTable + 53.3);
-    //SECOND AUTORITY
     pdf.line(130, finalTable + 48, 185, finalTable + 48);
     pdf.setFont("helvetica", "bold");
     pdf.text(authorityTypeAname, 130, finalTable + 51);
     pdf.setFont("helvetica", "normal");
-
     pdf.text(authorityTypeAcharge, 130, finalTable + 53.3);
-
     pdf.save("CERTIFICADO-ESTUDIOS-" + student + ".pdf");
 };
 
@@ -4335,8 +4226,8 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
     pdf.text(String(totalAprovedCredit), 175, initialTableY + 15);
 
     pdf.setFont("helvetica", "normal");
-    pdf.text("PROMEDIO CR. APROBADOS", 110, initialTableY  + 20);
-    pdf.text(":", 173, initialTableY  + 20);
+    pdf.text("PROMEDIO CR. APROBADOS", 110, initialTableY + 20);
+    pdf.text(":", 173, initialTableY + 20);
     pdf.setFont("helvetica", "normal");
     pdf.text(
         String(

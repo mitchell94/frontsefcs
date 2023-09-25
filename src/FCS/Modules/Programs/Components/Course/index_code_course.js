@@ -72,16 +72,6 @@ export default class Course extends Component {
         this.setState({
             planId: this.props.planId,
         });
-
-        // obtener el año del plan (dos dig)
-        let planName = this.props.planName;
-        let guionPosicion = planName.replace(/\s/g, "").indexOf("-");
-        const planYear = () =>
-            planName.replace(/\s/g, "").slice(guionPosicion - 2, guionPosicion);
-
-        this.setState({ planYear: planYear() });
-        //
-
         this.listCycleCourseByPlan(this.props.planId);
     }
 
@@ -92,38 +82,32 @@ export default class Course extends Component {
         }
         // MPT
         // generar código de curso nuevo
-        // if (prevState.order !== this.state.order) {
-        //     if (!["", "00", "0", 0].includes(this.state.order)) {
-        //         let order2digit = (ord) => {
-        //             console.log(ord);
-        //             if (ord < 10 && ord.toString().length < 2) {
-        //                 return `0${ord}`;
-        //             } else {
-        //                 return ord;
-        //             }
-        //         };
-        //         this.setState({
-        //             code: this.state.planYear +
-        //             this.state.typeCourse +
-        //             this.props.abbreviationProgram +
-        //             this.props.planCode +
-        //             "-" +
-        //             this.state.cicloLetter +
-        //             order2digit(this.state.order),
-        //         });
-        //     } else {
-        //         this.setState({ code: "" });
-        //     }
-        // }
+        if (prevState.order !== this.state.order) {
+            if (!["", "00", "0", 0].includes(this.state.order)) {
+                let order2digit = (ord) => {
+                    console.log(ord);
+                    if (ord < 10 && ord.toString().length < 2) {
+                        return `0${ord}`;
+                    } else {
+                        return ord;
+                    }
+                }
+                    // this.state.order < 10 && this.state.order.length < 2
+                    //     ? "0" + this.state.order
+                    //     : this.state.order;
+                this.setState({
+                    code:
+                        this.props.abbreviationProgram +
+                        this.props.planCode +
+                        "-" +
+                        this.state.cicloLetter +
+                        order2digit(this.state.order),
+                });
+            } else {
+                this.setState({ code: "" });
+            }
+        }
     }
-
-    // MPT
-    // generateCourseCode() {
-    //     let year = this.stat
-    //     let courseCode = this.state.planYear + 
-    //     this.setState({})
-    // }
-    // 
 
     getCourseRequired(planId, cycle) {
         this.setState({ coursesLoader: true });
@@ -359,15 +343,14 @@ export default class Course extends Component {
             case "typeCourse":
                 this.setState({ typeCourse: event.target.value });
                 break;
-                // comentar para automatico
-            case "code":
-                this.setState({
-                    code: event.target.value
-                        .replace(/[^a-zA-Z0-9/]/g, "")
-                        .slice(0, 15)
-                        .toUpperCase(),
-                });
-                break;
+            // case "code":
+            //     this.setState({
+            //         code: event.target.value
+            //             .replace(/[^a-zA-Z0-9/]/g, "")
+            //             .slice(0, 15)
+            //             .toUpperCase(),
+            //     });
+            //     break;
             case "denomination":
                 this.setState({
                     denomination: event.target.value
@@ -448,7 +431,7 @@ export default class Course extends Component {
         this.setState({
             titleModalCourse: "CURSO-",
             courseID: data.id,
-            code: data.code || "",//comentar para automatico
+            // code: data.code || "",
             typeCourse: data.type || "",
             denomination: data.denomination || "",
             abbreviation: data.abbreviation || "",
@@ -981,10 +964,10 @@ export default class Course extends Component {
                                     <Form.Control
                                         type="text"
                                         value={code}
-                                        onChange={this.handleChange("code")}//comentar para automatico
-                                        // placeholder="GENERAR POR N° ORDEN"
+                                        // onChange={this.handleChange("code")}
+                                        placeholder="GENERAR POR N° ORDEN"
                                         margin="normal"
-                                        // readOnly
+                                        readOnly
                                     />
                                 </Form.Group>
                             </Col>

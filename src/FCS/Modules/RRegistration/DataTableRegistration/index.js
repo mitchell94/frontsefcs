@@ -40,8 +40,9 @@ class DataTable extends Component {
       records.Registration_course,
       records.created_at,
       this.props.personData,
-      this.props.idProgram,
-      this.props.codePlan,
+      this.props.admissionPlan,
+      // this.props.idProgram,
+      // this.props.codePlan,
     );
   };
 

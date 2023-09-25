@@ -424,6 +424,7 @@ class StudyPlan extends Component {
             planMask: r.description,
             // MPT
             planCode: r.code,
+            planName: r.description
         });
     };
     closeFormCourse = () => {
@@ -502,12 +503,13 @@ class StudyPlan extends Component {
                                     </Row>
                                     <Course
                                         planId={this.state.plan}
+                                        planCode={this.state.planCode}
+                                        planName={this.state.planName}
                                         ref={(ref) => (this.Course = ref)}
                                         // MPT
                                         abbreviationProgram={
                                             this.state.abbreviationProgram
                                         }
-                                        planCode={this.state.planCode}
                                     />
                                 </Col>
                             </Row>

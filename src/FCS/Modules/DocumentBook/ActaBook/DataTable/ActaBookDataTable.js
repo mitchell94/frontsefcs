@@ -105,42 +105,42 @@ class Index extends Component {
         });
     };
 
-    async reportActa(id_acta_book) {
-
-        this.setState({registrationDataLoader: true});
-        const url = app.general + '/report-acta/' + id_acta_book;
-        try {
-
-            const res = await axios.get(url, app.headers);
-            if (res.data) {
-                component.pdfReportAutoTableActa(res.data)
-            }
-
-            // this.setState({registrationDataLoader: false});
-        } catch (err) {
-            // this.setState({registrationDataLoader: false});
-            PNotify.error({title: "Oh no!", text: "Algo salio mal al cargar los datos", delay: 2000});
-            console.log(err)
-
-        }
-
-    };
-
     // async reportActa(id_acta_book) {
-    //     const url = app.general + "/report-acta/" + id_acta_book;
+
+    //     this.setState({registrationDataLoader: true});
+    //     const url = app.general + '/report-acta/' + id_acta_book;
     //     try {
+
     //         const res = await axios.get(url, app.headers);
-    //         console.log(res.data);
-    //         this.setState({ dataActa: res.data });
+    //         if (res.data) {
+    //             component.pdfReportAutoTableActa(res.data)
+    //         }
+
+    //         // this.setState({registrationDataLoader: false});
     //     } catch (err) {
-    //         PNotify.error({
-    //             title: "Oh no!",
-    //             text: "Algo salio mal al cargar los datos",
-    //             delay: 2000,
-    //         });
-    //         console.log(err);
+    //         // this.setState({registrationDataLoader: false});
+    //         PNotify.error({title: "Oh no!", text: "Algo salio mal al cargar los datos", delay: 2000});
+    //         console.log(err)
+
     //     }
+
     // }
+
+    async reportActa(id_acta_book) {
+        const url = app.general + "/report-acta/" + id_acta_book;
+        try {
+            const res = await axios.get(url, app.headers);
+            console.log(res.data);
+            this.setState({ dataActa: res.data });
+        } catch (err) {
+            PNotify.error({
+                title: "Oh no!",
+                text: "Algo salio mal al cargar los datos",
+                delay: 2000,
+            });
+            console.log(err);
+        }
+    }
 
     handleChange = (field) => (event) => {
         switch (field) {

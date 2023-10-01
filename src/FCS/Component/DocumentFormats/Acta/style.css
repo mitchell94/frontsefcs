@@ -40,7 +40,7 @@
         height: 100%;
         font-family: Helvetica;
     }
-    
+
     .header-acta {
         position: fixed;
         width: 263mm;
@@ -68,16 +68,36 @@
 
     .table-acta {
         white-space: normal !important;
+        width: 100% !important;
     }
     .td-bold {
         font-weight: bold;
-        font-size: 0.8em;
+        font-size: 11pt;
     }
     .td-normal {
-        font-size: 0.8em;
+        font-size: 11pt;
     }
     .table-acta th,
     .table-acta td {
-        font-size: 0.7em;
+        font-size: 11pt;
     }
+
+    .body-acta {
+        margin-top: 100mm;
+        margin-bottom: 100mm;
+    }
+
+    /* .tr-student {
+        color: black;
+    } */
+    /* .table-students {
+        color: black;
+    } */
+    .table-students thead {
+        background-color: black !important;
+        color: white !important;
+    }
+    /* .page-break-after {
+        page-break-after: always;
+    } */
 }

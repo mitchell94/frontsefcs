@@ -73,15 +73,6 @@ export default class Course extends Component {
             planId: this.props.planId,
         });
 
-        // obtener el año del plan (dos dig)
-        let planName = this.props.planName;
-        let guionPosicion = planName.replace(/\s/g, "").indexOf("-");
-        const planYear = () =>
-            planName.replace(/\s/g, "").slice(guionPosicion - 2, guionPosicion);
-
-        this.setState({ planYear: planYear() });
-        //
-
         this.listCycleCourseByPlan(this.props.planId);
     }
 
@@ -90,40 +81,49 @@ export default class Course extends Component {
             this.setState({ planId: this.props.planId });
             this.listCycleCourseByPlan(this.props.planId);
         }
-        // MPT
-        // generar código de curso nuevo
-        // if (prevState.order !== this.state.order) {
-        //     if (!["", "00", "0", 0].includes(this.state.order)) {
-        //         let order2digit = (ord) => {
-        //             console.log(ord);
-        //             if (ord < 10 && ord.toString().length < 2) {
-        //                 return `0${ord}`;
-        //             } else {
-        //                 return ord;
-        //             }
-        //         };
-        //         this.setState({
-        //             code: this.state.planYear +
-        //             this.state.typeCourse +
-        //             this.props.abbreviationProgram +
-        //             this.props.planCode +
-        //             "-" +
-        //             this.state.cicloLetter +
-        //             order2digit(this.state.order),
-        //         });
-        //     } else {
-        //         this.setState({ code: "" });
-        //     }
-        // }
     }
 
     // MPT
-    // generateCourseCode() {
-    //     let year = this.stat
-    //     let courseCode = this.state.planYear + 
-    //     this.setState({})
-    // }
-    // 
+    generateCourseCode = () => {
+        let yearForCode = () => {
+            let planName = this.props.planName;
+            let guionPosicion = planName.replace(/\s/g, "").indexOf("-");
+            let planYear = () =>
+                planName
+                    .replace(/\s/g, "")
+                    .slice(guionPosicion - 2, guionPosicion);
+
+            return planYear();
+        };
+        let cicloForCode = (ciclo) => {
+            if (ciclo === "I") {
+                return "00I";
+            } else if (ciclo === "II") {
+                return "0II";
+            } else {
+                return "III";
+            }
+        };
+        let typeForCode = () =>
+            this.state.typeCourse === "Obligatorio" ? "O" : "E";
+        let orderForCode = (ord) => {
+            console.log(ord);
+            if (ord < 10 && ord.toString().length < 2) {
+                return `0${ord}`;
+            } else {
+                return ord;
+            }
+        };
+        let courseCode =
+            yearForCode() +
+            "E" +
+            cicloForCode(this.state.cicloCode) +
+            typeForCode() +
+            this.props.abbreviationProgram +
+            orderForCode(this.state.order);
+        this.setState({ code: courseCode });
+    };
+    //
 
     getCourseRequired(planId, cycle) {
         this.setState({ coursesLoader: true });
@@ -359,15 +359,15 @@ export default class Course extends Component {
             case "typeCourse":
                 this.setState({ typeCourse: event.target.value });
                 break;
-                // comentar para automatico
-            case "code":
-                this.setState({
-                    code: event.target.value
-                        .replace(/[^a-zA-Z0-9/]/g, "")
-                        .slice(0, 15)
-                        .toUpperCase(),
-                });
-                break;
+            // comentar para automatico
+            // case "code":
+            //     this.setState({
+            //         code: event.target.value
+            //             .replace(/[^a-zA-Z0-9/]/g, "")
+            //             .slice(0, 15)
+            //             .toUpperCase(),
+            //     });
+            //     break;
             case "denomination":
                 this.setState({
                     denomination: event.target.value
@@ -448,7 +448,7 @@ export default class Course extends Component {
         this.setState({
             titleModalCourse: "CURSO-",
             courseID: data.id,
-            code: data.code || "",//comentar para automatico
+            code: data.code || "", //comentar para automatico
             typeCourse: data.type || "",
             denomination: data.denomination || "",
             abbreviation: data.abbreviation || "",
@@ -462,21 +462,21 @@ export default class Course extends Component {
             action: "update",
             courseModal: true,
             // MPT
-            cicloLetter: ciclo,
+            // cicloLetter: ciclo,
         });
     };
     openModalCourse = (data) => {
+        this.setState({ cicloCode: data.ciclo });
         if (data.ciclo !== "I") {
             this.getCourseRequired(this.state.planId, data.ciclo);
         }
-
         this.setState({
             titleModalCourse: "NUEVO CURSO - CICLO " + data.ciclo,
             cicloID: data.id,
             action: "add",
             courseModal: true,
             // MPT
-            cicloLetter: data.ciclo,
+            // cicloLetter: data.ciclo,
         });
     };
     closeModalCourse = () => {
@@ -961,7 +961,72 @@ export default class Course extends Component {
                                     />
                                 </Form.Group>
                             </Col>
+
                             <Col xs={12} sm={12} md={6} lg={6} xl={6}>
+                                <Form.Group className="form-group fill">
+                                    <Form.Label
+                                        className="floating-label"
+                                        style={
+                                            order === ""
+                                                ? { color: "#ff5252 " }
+                                                : null
+                                        }
+                                    >
+                                        Número de orden
+                                        <small className="text-danger">
+                                            {" "}
+                                            *
+                                        </small>
+                                    </Form.Label>
+
+                                    <Form.Control
+                                        type="number"
+                                        min="1"
+                                        value={order}
+                                        onChange={this.handleChange("order")}
+                                        placeholder="Ingrese número de orden"
+                                        margin="normal"
+                                    />
+                                </Form.Group>
+                            </Col>
+
+                            <Col xs={12} sm={12} md={6} lg={6} xl={6}>
+                                <Form.Group className="form-group fill">
+                                    <Form.Label
+                                        className="floating-label"
+                                        style={
+                                            typeCourse === ""
+                                                ? { color: "#ff5252 " }
+                                                : null
+                                        }
+                                    >
+                                        Tipo
+                                        <small className="text-danger">
+                                            {" "}
+                                            *
+                                        </small>
+                                    </Form.Label>
+
+                                    <Form.Control
+                                        as="select"
+                                        value={typeCourse}
+                                        onChange={this.handleChange(
+                                            "typeCourse"
+                                        )}
+                                    >
+                                        <option defaultValue={true} hidden>
+                                            Por favor seleccione una opcción
+                                        </option>
+                                        <option value="Electivo">
+                                            Electivo
+                                        </option>
+                                        <option value="Obligatorio">
+                                            Obligatorio
+                                        </option>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Col>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                                 <Form.Group className="form-group fill">
                                     <Form.Label
                                         className="floating-label"
@@ -977,18 +1042,28 @@ export default class Course extends Component {
                                             *
                                         </small>
                                     </Form.Label>
-
                                     <Form.Control
                                         type="text"
                                         value={code}
-                                        onChange={this.handleChange("code")}//comentar para automatico
+                                        // onChange={this.handleChange("code")} //comentar para automatico
                                         // placeholder="GENERAR POR N° ORDEN"
                                         margin="normal"
-                                        // readOnly
+                                        readOnly
                                     />
                                 </Form.Group>
                             </Col>
-
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6}>
+                                <Button
+                                    className="btn btn-info d-block"
+                                    onClick={this.generateCourseCode}
+                                    disabled={
+                                        this.state.order === "" ||
+                                        this.state.typeCourse === ""
+                                    }
+                                >
+                                    Generar código
+                                </Button>
+                            </Col>
                             <Col xs={12} sm={12} md={6} lg={6} xl={6}>
                                 <Form.Group className="form-group fill">
                                     <Form.Label
@@ -1013,33 +1088,6 @@ export default class Course extends Component {
                                             "abbreviation"
                                         )}
                                         placeholder="Ingrese abreviatura del curso"
-                                        margin="normal"
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} sm={12} md={6} lg={6} xl={6}>
-                                <Form.Group className="form-group fill">
-                                    <Form.Label
-                                        className="floating-label"
-                                        style={
-                                            order === ""
-                                                ? { color: "#ff5252 " }
-                                                : null
-                                        }
-                                    >
-                                        Número de orden
-                                        <small className="text-danger">
-                                            {" "}
-                                            *
-                                        </small>
-                                    </Form.Label>
-
-                                    <Form.Control
-                                        type="number"
-                                        min="1"
-                                        value={order}
-                                        onChange={this.handleChange("order")}
-                                        placeholder="Ingrese número de orden"
                                         margin="normal"
                                     />
                                 </Form.Group>
@@ -1165,42 +1213,7 @@ export default class Course extends Component {
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
-                            <Col xs={12} sm={12} md={6} lg={6} xl={6}>
-                                <Form.Group className="form-group fill">
-                                    <Form.Label
-                                        className="floating-label"
-                                        style={
-                                            typeCourse === ""
-                                                ? { color: "#ff5252 " }
-                                                : null
-                                        }
-                                    >
-                                        Tipo
-                                        <small className="text-danger">
-                                            {" "}
-                                            *
-                                        </small>
-                                    </Form.Label>
 
-                                    <Form.Control
-                                        as="select"
-                                        value={typeCourse}
-                                        onChange={this.handleChange(
-                                            "typeCourse"
-                                        )}
-                                    >
-                                        <option defaultValue={true} hidden>
-                                            Por favor seleccione una opcción
-                                        </option>
-                                        <option value="Electivo">
-                                            Electivo
-                                        </option>
-                                        <option value="Obligatorio">
-                                            Obligatorio
-                                        </option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
                             {semesterMask !== "Semestre I" && (
                                 <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Form.Group className="form-group fill">

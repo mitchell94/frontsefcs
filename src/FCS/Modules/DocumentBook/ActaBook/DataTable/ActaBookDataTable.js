@@ -527,7 +527,7 @@ class Index extends Component {
                 </Modal>
 
                 {/* MPT */}
-                {this.state.dataActa && <Acta dataActa={this.state.dataActa} />}
+                {/* {this.state.dataActa && <Acta dataActa={this.state.dataActa} />} */}
             </>
         );
     }

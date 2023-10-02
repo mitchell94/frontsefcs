@@ -1,6 +1,7 @@
+// IMPORTANTE - ESTA VISTA ESTÁ SIN USO
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import "./style.css";
+// import "./style.css";
 function Acta(props) {
     let record = props.dataActa;
 

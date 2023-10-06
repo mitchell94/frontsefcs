@@ -955,8 +955,8 @@ const pdfReportAutoPaymentProgramAdmision = async (
         pdf.text(
             String(
                 movements[i].Person.name +
-                    " / " +
-                    movements[i].Person.document_number
+                " / " +
+                movements[i].Person.document_number
             ),
             53,
             30
@@ -1155,7 +1155,7 @@ const pdfReportAutoRecordAcademico = async (
             totalAprovedCredit =
                 data[i].Registration_course[j].note >= 14
                     ? totalAprovedCredit +
-                      data[i].Registration_course[j].credits
+                    data[i].Registration_course[j].credits
                     : totalAprovedCredit;
             let noteText = numberToLetter(
                 parseInt(data[i].Registration_course[j].note)
@@ -1175,8 +1175,8 @@ const pdfReportAutoRecordAcademico = async (
         pdf.setFont("helvetica", "normal");
         pdf.text(
             data[i].Academic_semester.Academic_calendar.denomination +
-                "-" +
-                data[i].Academic_semester.denomination,
+            "-" +
+            data[i].Academic_semester.denomination,
             37,
             initialTableY - 2
         );
@@ -1772,8 +1772,8 @@ const pdfReportAutoTableCertStudy2 = async (data) => {
     pdf.setFontSize(8);
     pdf.text(
         "Así consta en las actas, de la " +
-            principalOrganicUnit +
-            " a las que me remito en caso necesario.",
+        principalOrganicUnit +
+        " a las que me remito en caso necesario.",
         12,
         finalTable + 17
     );
@@ -2007,8 +2007,8 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
     pdf.setFontSize(8);
     pdf.text(
         "Así consta en las actas, de la " +
-            principalOrganicUnit +
-            " a las que me remito en caso necesario.",
+        principalOrganicUnit +
+        " a las que me remito en caso necesario.",
         12,
         finalTable + 17
     );
@@ -2074,10 +2074,6 @@ const pdfReportAutoTableConstancyEntry = async (data) => {
 
     pdf.setFontSize(18);
     pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.setFontSize(16);
-    // pdf.text(principalOrganicUnit, 50, 40);
-    // pdf.setFontSize(11);
-    // pdf.text('N°' + correlative, 190, 40, {align: 'right'});
     pdf.setFontSize(26);
     pdf.setFont("times", "bold");
     pdf.text(
@@ -2093,9 +2089,9 @@ const pdfReportAutoTableConstancyEntry = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         authorityTypeGcharge +
-            " " +
-            authorityTypeGname +
-            " de la Universidad Nacional de San Martín,Tarapoto, hace constar que:",
+        " " +
+        authorityTypeGname +
+        " de la Universidad Nacional de San Martín,Tarapoto, hace constar que:",
         20,
         75,
         {
@@ -2112,12 +2108,12 @@ const pdfReportAutoTableConstancyEntry = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Identificado con DNI N° " +
-            dni +
-            ", ha sido adminito al programa de estudio de la " +
-            program +
-            " promoción" +
-            admissionPlan +
-            ".",
+        dni +
+        ", ha sido adminito al programa de estudio de la " +
+        program +
+        " promoción" +
+        admissionPlan +
+        ".",
         20,
         130,
         {
@@ -2128,12 +2124,12 @@ const pdfReportAutoTableConstancyEntry = async (data) => {
 
     pdf.text(
         "El programa de la " +
-            principalOrganicUnit +
-            " tendra una duración de " +
-            duration +
-            " meses el mismo que inicio el " +
-            dateClass +
-            ".",
+        principalOrganicUnit +
+        " tendra una duración de " +
+        duration +
+        " meses el mismo que inicio el " +
+        dateClass +
+        ".",
         20,
         150,
         {
@@ -2243,12 +2239,12 @@ const pdfReportAutoTableConstancyExpedito = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Identificado con DNI N° " +
-            dni +
-            ",de la Facultad de Ciencias de la Salud en el programa de " +
-            program +
-            ", ha culminado sus estudios en " +
-            lastRegister +
-            ", no teniendo deuda académica, económica ni administrativa con la Universidad Nacional de San Martin, por lo que se le declara Expedito para hacer los trámites de titulación respectiva.",
+        dni +
+        ",de la Facultad de Ciencias de la Salud en el programa de " +
+        program +
+        ", ha culminado sus estudios en " +
+        lastRegister +
+        ", no teniendo deuda académica, económica ni administrativa con la Universidad Nacional de San Martin, por lo que se le declara Expedito para hacer los trámites de titulación respectiva.",
         20,
         130,
         {
@@ -2325,7 +2321,6 @@ const pdfReportAutoTableConstancyEntrySeunsm = async (data) => {
     let principalOrganicUnit = data.principalOrganicUnit.description;
     let correlative = data.correlative;
 
-    // ::::::::::::::::::::::::::::::::::::::::::::::::::start
     const pdf = new jsPDF();
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
@@ -2356,12 +2351,12 @@ const pdfReportAutoTableConstancyEntrySeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-            unityName +
-            " de la " +
-            facultyName +
-            ", " +
-            universityName +
-            ", extiende la presente constancia a:",
+        unityName +
+        " de la " +
+        facultyName +
+        ", " +
+        universityName +
+        ", extiende la presente constancia a:",
         10,
         55,
         {
@@ -2378,16 +2373,16 @@ const pdfReportAutoTableConstancyEntrySeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El/La estudiante con código (DNI) N° " +
-            codeStudent +
-            ", ha sido admitido/a al Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ". El programa tendrá una duración de " +
-            duration +
-            " meses, el mismo que inició el " +
-            dateClass +
-            ".",
+        codeStudent +
+        ", ha sido admitido/a al Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ". El programa tendrá una duración de " +
+        duration +
+        " meses, el mismo que inició el " +
+        dateClass +
+        ".",
         10,
         93,
         {
@@ -2481,9 +2476,9 @@ const pdfReportAutoTableConstancyStudy = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El " +
-            authorityTypeGcharge +
-            " " +
-            " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
+        authorityTypeGcharge +
+        " " +
+        " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
         20,
         75,
         {
@@ -2500,16 +2495,16 @@ const pdfReportAutoTableConstancyStudy = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Quien, es estudiante del Programa de " +
-            program +
-            " Promoción " +
-            admissionPlan +
-            " sede " +
-            sede +
-            "; actualmente se encuentra cursando el ciclo " +
-            ciclo +
-            ", en la " +
-            descriptionOrganicUnit +
-            ".     ",
+        program +
+        " Promoción " +
+        admissionPlan +
+        " sede " +
+        sede +
+        "; actualmente se encuentra cursando el ciclo " +
+        ciclo +
+        ", en la " +
+        descriptionOrganicUnit +
+        ".     ",
         20,
         130,
         {
@@ -2581,104 +2576,101 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
     let principalOrganicUnit = data.principalOrganicUnit.description;
     let descriptionOrganicUnit = data.principalOrganicUnit.abbreviation;
 
-    // CODIGO NUEVO
     const pdf = new jsPDF();
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
-    pdf.setFontSize(17);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
-    pdf.setFontSize(14);
-    pdf.setFont("helvetica", "normal");
-    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
+    pdf.addImage(imgUnsm, "PNG", 10, 10, 24, 24);
     pdf.setFontSize(16);
     pdf.setFont("helvetica", "normal");
-    pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
+    pdf.text(universityName.toUpperCase(), pageWidth / 2, 16, "center");
+    pdf.setFontSize(13);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 23, "center");
+    pdf.setFontSize(15);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(unityName.toUpperCase(), pageWidth / 2, 31, "center");
+    pdf.addImage(imgFcs, "PNG", 175, 10, 24, 24);
 
-    pdf.setFontSize(23);
+    pdf.setFontSize(19);
     pdf.setFont("helvetica", "bold");
     pdf.text(
-        "CONSTANCIA DE ESTUDIO" + " N°" + correlative,
+        "CONSTANCIA DE ESTUDIO N° " + correlative,
         pageWidth / 2,
-        58,
+        45,
         "center"
     );
-    pdf.setLineWidth(0.5);
-    pdf.line(20, 59, 190, 59);
+    pdf.setLineWidth(0.3);
+    pdf.line(10, 47, 200, 47);
 
     pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-            unityName +
-            " de la " +
-            facultyName +
-            ", " +
-            universityName +
-            ", extiende la presente constancia a:",
-        20,
-        75,
+        unityName +
+        " de la " +
+        facultyName +
+        ", " +
+        universityName +
+        ", extiende la presente constancia a:",
+        10,
+        55,
         {
-            maxWidth: 169,
+            maxWidth: 189,
             align: "justify",
         }
     );
 
-    pdf.setFontSize(21);
+    pdf.setFontSize(19);
     pdf.setFont("helvetica", "bold");
-    pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
+    pdf.text("Obsta. " + student, pageWidth / 2, 80, "center");
 
     pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El/La estudiante con código (DNI) N° " +
-            codeStudent +
-            ", actualmente se encuentra matriculado/a en el ciclo " +
-            ciclo +
-            " del Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", sede " +
-            sede +
-            ".",
-        20,
-        123,
+        codeStudent +
+        ", actualmente se encuentra matriculado/a en el ciclo " +
+        ciclo +
+        " del Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", sede " +
+        sede +
+        ".",
+        10,
+        93,
         {
-            maxWidth: 169,
+            maxWidth: 189,
             align: "justify",
         }
     );
     pdf.text(
         "Se extiende la presente constancia a petición del interesado/a para los fines que considere conveniente.",
-        20,
-        153,
+        10,
+        123,
         {
-            maxWidth: 169,
+            maxWidth: 189,
             align: "justify",
         }
     );
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("Tarapoto, " + date, 190, 205, {
-        align: "right",
-    });
+    pdf.text("Tarapoto, " + date, 118, 155);
 
-    pdf.text("Atentamente", pageWidth / 2, 225, "center");
+    pdf.text("Atentamente", pageWidth / 2, 175, "center");
 
-    pdf.line(66, 250, 145, 250);
+    pdf.line(58, 214, 153, 214);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(11);
-    pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
+    pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 218.5, "center");
     pdf.setFont("helvetica", "normal");
 
-    pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
+    pdf.text("COORDINADORA", pageWidth / 2, 223.5, "center");
 
     pdf.setFontSize(11);
     pdf.setFont("helvetica", "normal");
-    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 261.5, "center");
+    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 227.5, "center");
 
     // Total page number plugin only available in jspdf v1.0+
     if (typeof pdf.putTotalPages === "function") {
@@ -2686,126 +2678,8 @@ const pdfReportAutoTableConstancyStudySeunsm = async (data) => {
     }
 
     pdf.save("CONSTANCIA-ESTUDIO-" + student + ".pdf");
-
-    // CODIGO ANTIGUO HACIA ABAJO
-    // const pdf = new jsPDF();
-    // const imgData = logoUnsm;
-
-    // const totalPagesExp = "{total_pages_count_string}";
-    // let pageWidth = pdf.internal.pageSize.getWidth();
-    // pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
-    // pdf.setFontSize(18);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
-    // pdf.setFontSize(18);
-    // pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.setFontSize(26);
-    // pdf.setFont("times", "bold");
-    // pdf.text(
-    //     "CONSTANCIA DE ESTUDIO N° " + correlative,
-    //     pageWidth / 2,
-    //     60,
-    //     "center"
-    // );
-    // pdf.setLineWidth(0.5);
-    // pdf.line(19, 62, 192, 62);
-
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la Unidad de Segunda Especialidad, Facultad de Ciencias de la Salud, Universidad Nacional de San Martín, extiende la presente constancia a:",
-    //     20,
-    //     75,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFontSize(21);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
-
-    // pdf.setFontSize(14);
-
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "El(La) estudiante con Código (DNI) N°: " +
-    //         codeStudent +
-    //         "; actualmente se encuentra matriculado(a) en el " +
-    //         ciclo +
-    //         " ciclo del Programa de " +
-    //         program +
-    //         ", Promoción  " +
-    //         admissionPlan +
-    //         ", sede " +
-    //         sede +
-    //         ".",
-    //     20,
-    //     125,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-
-    // pdf.text(
-    //     "Se extiende la presente constancia a petición del interesado(a) para los fines que considere conveniente.",
-    //     20,
-    //     155,
-    //     {
-    //         maxWidth: 170,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Tarapoto, " + date, 190, 180, {
-    //     align: "right",
-    // });
-
-    // pdf.text("Atentamente", pageWidth / 2, 200, "center");
-    // pdf.setFont("helvetica", "bold");
-    // pdf.setFontSize(10);
-    // pdf.line(66, 250, 145, 250);
-    // pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.setFontSize(11);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
-
-    // pdf.setFontSize(10);
-    // pdf.text(
-    //     "Unidad de Segunda Especialidad - FCS",
-    //     pageWidth / 2,
-    //     261,
-    //     "center"
-    // );
-
-    // pdf.setFontSize(7);
-    // pdf.setFont("helvetica", "normal");
-
-    // // pdf.setFontSize(7)
-    // // pdf.setFont("helvetica", "normal");
-    // // pdf.text(moment().format('HH:mm DD/MM/YYYY '), 181, 65);
-
-    // const pageCount = pdf.internal.getNumberOfPages();
-
-    // // pdf.setFont('helvetica', 'normal')
-    // // pdf.setFontSize(8)
-    // // for (let i = 1; i <= pageCount; i++) {
-    // //     pdf.setPage(i)
-    // //     pdf.text('Pag ' + String(i) + ' de ' + String(pageCount), 197, 287, {
-    // //         align: 'right'
-    // //     })
-    // // }
-
-    // // Total page number plugin only available in jspdf v1.0+
-    // if (typeof pdf.putTotalPages === "function") {
-    //     pdf.putTotalPages(totalPagesExp);
-    // }
-
-    // pdf.save("CONSTANCIA-ESTUDIOS-" + student + ".pdf");
 };
+
 const pdfReportAutoTableConstancyEgress = async (data) => {
     let student = data.studentData.Person.name;
     let firtsRegister = data.firtsRegister;
@@ -2830,7 +2704,6 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
 
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
-    // let pageHeight = pdf.internal.pageSize.getHeight();
     pdf.addImage(imgData, "JPEG", 13, 14, 28, 28);
     if (entity === 1) {
         pdf.addImage(logoEpg, "JPEG", 168, 14, 28, 28);
@@ -2842,10 +2715,7 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
 
     pdf.setFontSize(18);
     pdf.text(principalOrganicUnit.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.text('N° 1', 190, 40, {align: 'right'});
 
-    // pdf.setFontSize(11);
-    // pdf.text('N°' + correlative, 190, 40, {align: 'right'});
     pdf.setFontSize(25);
     pdf.setFont("times", "bold");
     pdf.text(
@@ -2861,8 +2731,8 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El " +
-            authorityTypeGcharge +
-            " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
+        authorityTypeGcharge +
+        " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
         20,
         75,
         {
@@ -2879,15 +2749,15 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Ha culminado sus estudios en el programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", con un total de " +
-            credit +
-            " créditos de acuerdo a las" +
-            " Normas y Reglamentos de la " +
-            principalOrganicUnit +
-            " de la Universidad Nacional de San Martín.",
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", con un total de " +
+        credit +
+        " créditos de acuerdo a las" +
+        " Normas y Reglamentos de la " +
+        principalOrganicUnit +
+        " de la Universidad Nacional de San Martín.",
         20,
         130,
         {
@@ -2921,28 +2791,7 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
 
     pdf.text("Atentamente", pageWidth / 2, 225, "center");
 
-    // pdf.setFont('helvetica', "bold");
-    // pdf.setFontSize(11);
-    // pdf.line(66, 230, 145, 230);
-    // pdf.text(authorityTypeGname, pageWidth / 2, 233.5, 'center');
-    // pdf.setFont('helvetica', "normal");
-    //
-    // pdf.text(authorityTypeGcharge, pageWidth / 2, 237, 'center');
-
-    // pdf.setFontSize(7)
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(moment().format('HH:mm DD/MM/YYYY '), 181, 65);
-
     const pageCount = pdf.internal.getNumberOfPages();
-
-    // pdf.setFont('helvetica', 'normal')
-    // pdf.setFontSize(8)
-    // for (let i = 1; i <= pageCount; i++) {
-    //     pdf.setPage(i)
-    //     pdf.text('Pag ' + String(i) + ' de ' + String(pageCount), 197, 287, {
-    //         align: 'right'
-    //     })
-    // }
 
     // Total page number plugin only available in jspdf v1.0+
     if (typeof pdf.putTotalPages === "function") {
@@ -2993,12 +2842,12 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-            unityName +
-            " de la " +
-            facultyName +
-            ", " +
-            universityName +
-            ", extiende la presente constancia a:",
+        unityName +
+        " de la " +
+        facultyName +
+        ", " +
+        universityName +
+        ", extiende la presente constancia a:",
         10,
         55,
         {
@@ -3015,18 +2864,18 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El/La estudiante con código (DNI) N° " +
-            codeStudent +
-            ", ha culminado sus estudios en el Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", con un total de " +
-            credit +
-            " créditos de acuerdo a las Normas y Reglamentos de la " +
-            unityName +
-            " y de la " +
-            universityName +
-            ".",
+        codeStudent +
+        ", ha culminado sus estudios en el Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", con un total de " +
+        credit +
+        " créditos de acuerdo a las Normas y Reglamentos de la " +
+        unityName +
+        " y de la " +
+        universityName +
+        ".",
         10,
         93,
         {
@@ -3069,113 +2918,6 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFontSize(11);
     pdf.setFont("helvetica", "normal");
     pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 247.5, "center");
-
-    // ANTIGUO CODIGO
-    // pdf.addImage(imgUnsm, "PNG", 13, 14, 28, 28);
-    // pdf.setFontSize(17);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(universityName.toUpperCase(), pageWidth / 2, 20, "center");
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(facultyName.toUpperCase(), pageWidth / 2, 28, "center");
-    // pdf.setFontSize(16);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(unityName.toUpperCase(), pageWidth / 2, 36, "center");
-    // pdf.addImage(imgFcs, "PNG", 169, 14, 28, 28);
-
-    // pdf.setFontSize(23);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text(
-    //     "CONSTANCIA DE EGRESO" + " N°" + correlative,
-    //     pageWidth / 2,
-    //     58,
-    //     "center"
-    // );
-    // pdf.setLineWidth(0.5);
-    // pdf.line(20, 59, 190, 59);
-
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
-    //         unityName +
-    //         " de la " +
-    //         facultyName +
-    //         ", " +
-    //         universityName +
-    //         ", extiende la presente constancia a:",
-    //     20,
-    //     75,
-    //     {
-    //         maxWidth: 169,
-    //         align: "justify",
-    //     }
-    // );
-
-    // pdf.setFontSize(21);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Obsta. " + student, pageWidth / 2, 105, "center");
-
-    // pdf.setFontSize(14);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(
-    //     "El/La estudiante con código (DNI) N° " +
-    //         codeStudent +
-    //         ", ha culminado sus estudios en el Programa de " +
-    //         program +
-    //         " - Promoción " +
-    //         admissionPlan +
-    //         ", con un total de " +
-    //         credit +
-    //         " créditos de acuerdo a las Normas y Reglamentos de la " +
-    //         unityName +
-    //         " y de la " +
-    //         universityName +
-    //         ".",
-    //     20,
-    //     123,
-    //     {
-    //         maxWidth: 169,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.text(
-    //     "Fecha inicio " + firtsRegister + " ; fecha fin " + lastRegister,
-    //     20,
-    //     160,
-    //     {
-    //         maxWidth: 169,
-    //         align: "justify",
-    //     }
-    // );
-    // pdf.text(
-    //     "Se extiende la presente constancia a petición del interesado/a para los fines que considere conveniente.",
-    //     20,
-    //     173,
-    //     {
-    //         maxWidth: 169,
-    //         align: "justify",
-    //     }
-    // );
-
-    // pdf.setFont("helvetica", "bold");
-    // pdf.text("Tarapoto, " + date, 190, 205, {
-    //     align: "right",
-    // });
-
-    // pdf.text("Atentamente", pageWidth / 2, 225, "center");
-
-    // pdf.line(66, 250, 145, 250);
-    // pdf.setFont("helvetica", "bold");
-    // pdf.setFontSize(11);
-    // pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
-    // pdf.setFont("helvetica", "normal");
-
-    // pdf.text("COORDINADORA", pageWidth / 2, 257.5, "center");
-
-    // pdf.setFontSize(11);
-    // pdf.setFont("helvetica", "normal");
-    // pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 261.5, "center");
 
     // Total page number plugin only available in jspdf v1.0+
     if (typeof pdf.putTotalPages === "function") {
@@ -3234,8 +2976,8 @@ const pdfReportAutoTableConstancyRegistration = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El " +
-            authorityTypeG +
-            " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
+        authorityTypeG +
+        " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
         20,
         75,
         {
@@ -3252,11 +2994,11 @@ const pdfReportAutoTableConstancyRegistration = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Se encuentra Matrículado en el programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", la primera matrícula registra " +
-            firtsRegister,
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", la primera matrícula registra " +
+        firtsRegister,
         20,
         130,
         {
@@ -3368,8 +3110,8 @@ const pdfReportAutoTableConstancyAdeudar = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El " +
-            authorityTypeGcharge +
-            " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
+        authorityTypeGcharge +
+        " de la Universidad Nacional de San Martín - Tarapoto, hace constar que:",
         20,
         75,
         {
@@ -3386,12 +3128,12 @@ const pdfReportAutoTableConstancyAdeudar = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Egresado(a) de la " +
-            organicAbreviation +
-            " en el Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", No adeuda bienes, ni recursos económicos a la Universidad Nacional de San Martín.",
+        organicAbreviation +
+        " en el Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", No adeuda bienes, ni recursos económicos a la Universidad Nacional de San Martín.",
         20,
         130,
         {
@@ -3501,8 +3243,8 @@ const pdfReportAutoTableConstancyOrdenMerito = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "El " +
-            authorityTypeGcharge +
-            " de la Universidad Nacional de San Martín, hace constar que:",
+        authorityTypeGcharge +
+        " de la Universidad Nacional de San Martín, hace constar que:",
         20,
         75,
         {
@@ -3519,19 +3261,19 @@ const pdfReportAutoTableConstancyOrdenMerito = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         studentState +
-            " del Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            " ,obtuvo un promedio ponderado acumulado de " +
-            studentPonderado +
-            ", ocupando el puesto número " +
-            position +
-            "° de " +
-            studentTotal +
-            " estudiantes" +
-            meritoStudent +
-            ".",
+        " del Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        " ,obtuvo un promedio ponderado acumulado de " +
+        studentPonderado +
+        ", ocupando el puesto número " +
+        position +
+        "° de " +
+        studentTotal +
+        " estudiantes" +
+        meritoStudent +
+        ".",
         20,
         130,
         {
@@ -3799,12 +3541,12 @@ const pdfReportAutoTableConstancyAdeudarSeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Egresado(a) de la " +
-            organicAbreviation +
-            " en el Programa de " +
-            program +
-            " - Promoción " +
-            admissionPlan +
-            ", no adeuda bienes, ni recursos económicos a la Universidad Nacional de San Martin.",
+        organicAbreviation +
+        " en el Programa de " +
+        program +
+        " - Promoción " +
+        admissionPlan +
+        ", no adeuda bienes, ni recursos económicos a la Universidad Nacional de San Martin.",
         20,
         130,
         {
@@ -3922,12 +3664,12 @@ const pdfReportAutoTableConstancyDisciplinarySeunsm = async (data) => {
     pdf.setFont("helvetica", "normal");
     pdf.text(
         "Que, la ex estudiante del Programa de " +
-            program +
-            " - La cual inicio el Semestre " +
-            firtsRegister +
-            " y culminó el Semestre " +
-            lastRegister +
-            ", durante su permanencia en esta casa Superior de Estudios no ha sido separada por medidas disciplinarias; como consta en los archivos correspondientes.",
+        program +
+        " - La cual inicio el Semestre " +
+        firtsRegister +
+        " y culminó el Semestre " +
+        lastRegister +
+        ", durante su permanencia en esta casa Superior de Estudios no ha sido separada por medidas disciplinarias; como consta en los archivos correspondientes.",
         20,
         130,
         {
@@ -3981,6 +3723,453 @@ const pdfReportAutoTableConstancyDisciplinarySeunsm = async (data) => {
 
     pdf.save("CONSTANCIA-DISCIPLINARIA-" + student + ".pdf");
 };
+
+// const pdfReportAutoTableRercordAcademic = async (data) => {
+//     let principalOrganicUnit = data.principalOrganicUnit.description,
+//         person = data.studentData.Person.name,
+//         personDocument = data.studentData.Person.document_number,
+//         registration = data.registration,
+//         program = data.studentData.Program.denomination,
+//         sedeRegistration =
+//             data.studentData.Program.Organic_unit_register.Campu.denomination.toUpperCase(),
+//         unitRegistration =
+//             data.studentData.Program.Organic_unit_register.denomination.toUpperCase(),
+//         // MPT
+//         admissionPlan = data.studentData.Admission_plan.description;
+
+
+//     let pagesGenerate = Math.ceil(registration.length / 3);
+
+//     function splitArray(arr, cantSubArray) {
+//         let result = [];
+//         for (let i = 0; i < arr.length; i += cantSubArray) {
+//             result.push(arr.slice(i, i + cantSubArray));
+//         }
+//         return result;
+//     }
+
+//     let arrayParts = splitArray(registration, 3);
+
+//     const pdf = new jsPDF();
+//     const totalPagesExp = "{total_pages_count_string}";
+//     let pageWidth = pdf.internal.pageSize.getWidth();
+
+//     let totalAprovedCourse = 0;
+//     let totalAprovedCredit = 0;
+//     let aprovedPromedi = 0;
+//     let totalCourse = 0;
+//     let totalCredit = 0;
+//     let generalPromedi = 0;
+//     let initialTableY = 82;
+
+//     const addHeader = () => {
+//         pdf.addImage(imgUnsm, "PNG", 10, 10, 24, 24);
+//         pdf.setFontSize(16);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(universityName.toUpperCase(), pageWidth / 2, 16, "center");
+//         pdf.setFontSize(13);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(facultyName.toUpperCase(), pageWidth / 2, 23, "center");
+//         pdf.setFontSize(15);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(unityName.toUpperCase(), pageWidth / 2, 31, "center");
+//         pdf.addImage(imgFcs, "PNG", 175, 10, 24, 24);
+
+//         pdf.setFontSize(19);
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("RÉCORD ACADÉMICO", pageWidth / 2, 42, "center");
+//         pdf.setLineWidth(0.3);
+//         pdf.line(10, 44, 200, 44);
+
+//         pdf.setFontSize(10);
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("PROGRAMA", 10, 51);
+//         pdf.text(":", 34, 51);
+//         pdf.setFont("helvetica", "normal");
+//         let splitProgram = pdf.splitTextToSize(program.toUpperCase(), 162);
+//         pdf.text(splitProgram, 37, 51);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("UNIDAD", 10, 61);
+//         pdf.text(":", 34, 61);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(unitRegistration.toUpperCase(), 37, 61);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("SEDE", 118, 61);
+//         pdf.text(":", 129, 61);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(sedeRegistration, 132, 61);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("ESTUDIANTE", 10, 66);
+//         pdf.text(":", 34, 66);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(person, 37, 66);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("CÓDIGO/DNI", 10, 71);
+//         pdf.text(":", 34, 71);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(personDocument, 37, 71);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("INGRESO", 60, 71);
+//         pdf.text(":", 78, 71);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(admissionPlan, 81, 71);
+//     };
+
+//     const addContent = (part) => {
+//         pdf.autoTable({
+//             margin: [10, 10],
+//             theme: "grid",
+//             startY: 95,
+//             headStyles: {
+//                 font: "helvetica",
+//                 fontStyle: "bold",
+//                 fillColor: "#000",
+//             },
+//             head: [
+//                 [
+//                     "#",
+//                     "APELLIDOS Y NOMBRES",
+//                     { content: "CÓDIGO", styles: { halign: "center" } },
+//                     "NOTA",
+//                     "LETRA",
+//                 ],
+//             ],
+//             styles: {
+//                 fontSize: 9,
+//                 font: "helvetica",
+//                 fontStyle: "normal",
+//                 cellPadding: 1.3,
+//             },
+//             columnStyles: {
+//                 0: { cellWidth: 8 },
+//                 2: { cellWidth: 20, halign: "center" },
+//                 3: { cellWidth: 13, halign: "center" },
+//                 4: { cellWidth: 24 },
+//             },
+//             body: part,
+//         });
+//     };
+
+//     const addFooter = (finalTable) => {
+//         pdf.setFontSize(8);
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("FECHA DE EMISIÓN :", 10, finalTable + 6);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(moment(actaDate).format("DD/MM/YYYY"), 40, finalTable + 6);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("HORA DE EMISIÓN :", 63, finalTable + 6);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(
+//             moment(actaDate).format("HH:mm:ss") + " Hrs",
+//             91,
+//             finalTable + 6
+//         );
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("FECHA DE RECEPCIÓN :", 133, 260);
+//         pdf.setLineWidth(0.3);
+//         pdf.setDrawColor(0, 0, 0);
+//         pdf.line(170, 260, 200, 260);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.setDrawColor(0, 0, 0);
+//         pdf.setFontSize(8);
+//         pdf.setLineWidth(0.3);
+//         pdf.setDrawColor(0, 0, 0);
+//         pdf.line(20, 237, 70, 237);
+//         pdf.text("DOCENTE", 37, 240);
+//         pdf.line(140, 237, 190, 237);
+//         pdf.text("V° B° COORDINADOR USE", 147, 240);
+
+//         pdf.autoTable({
+//             margin: [10, 10],
+//             theme: "grid",
+//             startY: 245,
+//             tableWidth: 120,
+//             headStyles: {
+//                 font: "helvetica",
+//                 fontStyle: "bold",
+//                 fillColor: "#000",
+//                 halign: "center",
+//             },
+//             head: [["DESCRIPCIÓN", "MATRICULADOS", "APROBADOS", "DESAPROBADOS"]],
+//             styles: {
+//                 fontSize: 9,
+//                 font: "helvetica",
+//                 fontStyle: "normal",
+//                 halign: "center",
+//                 cellPadding: { top: 1, bottom: 1 },
+//             },
+//             body: [
+//                 ["CANTIDAD", totalStudent, approvedStudent, desaprovedStudent],
+//                 [
+//                     "PORCENTAJE",
+//                     "100.00%",
+//                     Math.round((approvedStudent * 100) / totalStudent).toFixed(2) + "%",
+//                     Math.round((desaprovedStudent * 100) / totalStudent).toFixed(2) + "%",
+//                 ],
+//             ],
+//         });
+
+
+
+//         let finalTable3 = pdf.lastAutoTable.finalY;
+
+//         pdf.setFontSize(7);
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("1. ORIGINAL", 10, finalTable3 + 5);
+//         pdf.text(":", 33, finalTable3 + 5);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 5);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("2. COPIA", 10, finalTable3 + 8);
+//         pdf.text(":", 33, finalTable3 + 8);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 8);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("3. COPIA", 10, finalTable3 + 11);
+//         pdf.text(":", 33, finalTable3 + 11);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text("DIRECCIÓN DE ASUNTOS ACADÉMICOS", 35, finalTable3 + 11);
+
+//         pdf.setFont("helvetica", "bold");
+//         pdf.text("4. COPIA", 10, finalTable3 + 14);
+//         pdf.text(":", 33, finalTable3 + 14);
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text("DOCENTE", 35, finalTable3 + 14);
+
+//     };
+
+//     for (let index = 0; index < pagesGenerate; index++) {
+//         if (index > 0) {
+//             pdf.addPage();
+//         }
+//         addHeader();
+//         addContent(arrayParts[index]);
+//         let finalTable = pdf.lastAutoTable.finalY;
+//         addFooter(finalTable);
+
+//         pdf.setFont("helvetica", "normal");
+//         pdf.text(
+//             "Pag " + String(index + 1) + " de " + String(pagesGenerate),
+//             197,
+//             287,
+//             {
+//                 align: "right",
+//             }
+//         );
+//     }
+
+//     // -----------------------------------------------------------------
+
+
+
+    
+
+//     pdf.setFontSize(7);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(moment().format("HH:mm DD/MM/YYYY "), 181, initialTableY - 2);
+//     pdf.setFontSize(10);
+//     let academicSemester = "-";
+
+//     if (registration.length > 0) {
+//         for (let i = 0; i < registration.length; i++) {
+//             let tempBody = [];
+//             for (
+//                 let j = 0;
+//                 j < registration[i].Registration_course.length;
+//                 j++
+//             ) {
+//                 let typeCourse =
+//                     registration[i].Registration_course[j].type_course ===
+//                         "Obligatorio"
+//                         ? "O"
+//                         : "E";
+//                 totalCourse = totalCourse + 1;
+//                 totalCredit =
+//                     totalCredit +
+//                     registration[i].Registration_course[j].credits;
+//                 generalPromedi =
+//                     generalPromedi +
+//                     registration[i].Registration_course[j].note;
+//                 totalAprovedCourse =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? totalAprovedCourse + 1
+//                         : totalAprovedCourse;
+//                 aprovedPromedi =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? aprovedPromedi +
+//                         registration[i].Registration_course[j].note
+//                         : aprovedPromedi;
+//                 totalAprovedCredit =
+//                     registration[i].Registration_course[j].note >= 14
+//                         ? totalAprovedCredit +
+//                         registration[i].Registration_course[j].credits
+//                         : totalAprovedCredit;
+//                 let noteText = numberToLetter(
+//                     parseInt(registration[i].Registration_course[j].note)
+//                 );
+//                 tempBody.push([
+//                     registration[i].Registration_course[j].code,
+//                     registration[i].Registration_course[j].denomination,
+//                     registration[i].Registration_course[j].ciclo,
+//                     "NN",
+//                     "",
+//                     typeCourse,
+//                     registration[i].Registration_course[j].credits,
+//                     registration[i].Registration_course[j].note,
+//                     // " " +
+//                     // noteText,
+//                     noteText,
+//                 ]);
+//             }
+//             pdf.setFont("helvetica", "bold");
+//             pdf.text("SEMESTRE", 10, initialTableY - 2);
+//             pdf.setFont("helvetica", "normal");
+//             academicSemester = registration[i].Academic_semester.denomination;
+
+//             pdf.text(
+//                 registration[i].Academic_semester.Academic_calendar
+//                     .denomination +
+//                 " - " +
+//                 academicSemester,
+//                 37,
+//                 initialTableY - 2
+//             );
+//             pdf.autoTable({
+//                 margin: [20, 10],
+//                 theme: "grid",
+//                 styles: { fontSize: 7, font: "helvetica", fontStyle: "normal" },
+//                 headStyles: {
+//                     font: "helvetica",
+//                     fontStyle: "bold",
+//                     fillColor: "#000",
+//                 },
+//                 columnStyles: {
+//                     0: { cellWidth: 23 },
+//                     // 1: { cellWidth: 111 },
+//                     2: { cellWidth: 7, halign: "center" },
+//                     3: { cellWidth: 7, halign: "center" },
+//                     4: { cellWidth: 7, halign: "center" },
+//                     5: { cellWidth: 7, halign: "center" },
+//                     6: { cellWidth: 7, halign: "center" },
+//                     7: { cellWidth: 11, halign: "center" },
+//                     8: { cellWidth: 20 },
+//                 },
+//                 startY: initialTableY,
+//                 head: [
+//                     [
+//                         "CÓDIGO",
+//                         "ASIGNATURA",
+//                         { content: "CL", styles: { halign: "center" } },
+//                         { content: "CV", styles: { halign: "center" } },
+//                         { content: "TN", styles: { halign: "center" } },
+//                         { content: "TC", styles: { halign: "center" } },
+//                         { content: "CR", styles: { halign: "center" } },
+//                         "NOTA",
+//                         "LETRA",
+//                     ],
+//                 ],
+
+//                 body: tempBody,
+//             });
+//             initialTableY = pdf.lastAutoTable.finalY + 8;
+//         }
+//         initialTableY = pdf.lastAutoTable.finalY;
+//     }
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL CURSOS", 10, initialTableY + 7);
+//     pdf.text(":", 50, initialTableY + 7);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalCourse), 52, initialTableY + 7);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL CRÉDITOS", 10, initialTableY + 12);
+//     pdf.text(":", 50, initialTableY + 12);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalCredit), 52, initialTableY + 12);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("PROMEDIO GENERAL", 10, initialTableY + 17);
+//     pdf.text(":", 50, initialTableY + 17);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         String(Math.round((generalPromedi / totalCourse) * 100) / 100),
+//         52,
+//         initialTableY + 17
+//     );
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL DE CURSOS APROBADOS", 120, initialTableY + 7);
+//     pdf.text(":", 183, initialTableY + 7);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalAprovedCourse), 185, initialTableY + 7);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("TOTAL DE CRÉDITOS APROBADOS", 120, initialTableY + 12);
+//     pdf.text(":", 183, initialTableY + 12);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(String(totalAprovedCredit), 185, initialTableY + 12);
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("PROMEDIO CR. APROBADOS", 120, initialTableY + 17);
+//     pdf.text(":", 183, initialTableY + 17);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         String(
+//             totalAprovedCourse !== 0
+//                 ? Math.round((aprovedPromedi / totalAprovedCourse) * 100) / 100
+//                 : 0
+//         ),
+//         185,
+//         initialTableY + 17
+//     );
+//     pdf.setFontSize(8);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text("CL: Ciclo", 10, initialTableY + 23);
+//     pdf.text("CV: Curso Convalidado(C)", 30, initialTableY + 23);
+//     pdf.text("TN: Tipo de nota", 70, initialTableY + 23);
+//     pdf.text(
+//         "TC: Tipo de curso(O=Obligatorio, E=Electivo)",
+//         100,
+//         initialTableY + 23
+//     );
+//     pdf.text("CR: Créditos", 163, initialTableY + 23);
+
+//     pdf.setLineWidth(0.3);
+//     pdf.setDrawColor(0, 0, 0);
+//     pdf.line(73, 275, 138, 275);
+//     pdf.setFont("helvetica", "bold");
+//     pdf.setFontSize(10);
+//     pdf.text("FIRMA DEL COORDINADOR", pageWidth / 2, 278.5, "center");
+
+//     const pageCount = pdf.internal.getNumberOfPages();
+
+//     pdf.setFont("helvetica", "normal");
+//     pdf.setFontSize(8);
+//     for (let i = 1; i <= pageCount; i++) {
+//         pdf.setPage(i);
+//         pdf.text("Pag " + String(i) + " de " + String(pageCount), 197, 287, {
+//             align: "right",
+//         });
+//     }
+
+//     // Total page number plugin only available in jspdf v1.0+
+//     if (typeof pdf.putTotalPages === "function") {
+//         pdf.putTotalPages(totalPagesExp);
+//     }
+
+//     pdf.save("RECORD-ACADEMICO-" + person + ".pdf");
+// };
 
 const pdfReportAutoTableRercordAcademic = async (data) => {
     let principalOrganicUnit = data.principalOrganicUnit.description,
@@ -4079,7 +4268,7 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
             ) {
                 let typeCourse =
                     registration[i].Registration_course[j].type_course ===
-                    "Obligatorio"
+                        "Obligatorio"
                         ? "O"
                         : "E";
                 totalCourse = totalCourse + 1;
@@ -4096,12 +4285,12 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
                 aprovedPromedi =
                     registration[i].Registration_course[j].note >= 14
                         ? aprovedPromedi +
-                          registration[i].Registration_course[j].note
+                        registration[i].Registration_course[j].note
                         : aprovedPromedi;
                 totalAprovedCredit =
                     registration[i].Registration_course[j].note >= 14
                         ? totalAprovedCredit +
-                          registration[i].Registration_course[j].credits
+                        registration[i].Registration_course[j].credits
                         : totalAprovedCredit;
                 let noteText = numberToLetter(
                     parseInt(registration[i].Registration_course[j].note)
@@ -4128,8 +4317,8 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
             pdf.text(
                 registration[i].Academic_semester.Academic_calendar
                     .denomination +
-                    " - " +
-                    academicSemester,
+                " - " +
+                academicSemester,
                 37,
                 initialTableY - 2
             );
@@ -4259,242 +4448,6 @@ const pdfReportAutoTableRercordAcademic = async (data) => {
 
     pdf.save("RECORD-ACADEMICO-" + person + ".pdf");
 };
-
-// const pdfReportAutoTableRercordAcademic = async (data) => {
-//     let principalOrganicUnit = data.principalOrganicUnit.description,
-//         person = data.studentData.Person.name,
-//         registration = data.registration,
-//         program = data.studentData.Program.denomination,
-//         sedeRegistration =
-//             data.studentData.Program.Organic_unit_register.Campu.denomination.toUpperCase(),
-//         unitRegistration =
-//             data.studentData.Program.Organic_unit_register.denomination.toUpperCase();
-
-//     const pdf = new jsPDF();
-//     const imgData = logoUnsm;
-//     const totalPagesExp = "{total_pages_count_string}";
-//     let pageWidth = pdf.internal.pageSize.getWidth();
-//     pdf.addImage(imgData, "JPEG", 6, 14, 28, 28);
-//     pdf.setFontSize(20);
-//     pdf.setFont("helvetica", "normal");
-
-//     pdf.text("UNIVERSIDAD NACIONAL DE SAN MARTÍN", pageWidth / 2, 20, "center");
-
-//     pdf.setFontSize(18);
-//     pdf.text(principalOrganicUnit, pageWidth / 2, 28, "center");
-//     pdf.setFontSize(24);
-//     pdf.setFont("times", "bold");
-//     pdf.text("RECORD ACADEMICOFFFF", pageWidth / 2, 39, "center");
-//     pdf.setLineWidth(0.5);
-
-//     let yAxis = 50;
-//     pdf.setFontSize(10);
-//     pdf.setFont("helvetica", "bold");
-//     pdf.text("PROGRAMA", 10, yAxis);
-//     pdf.text(":", 34, yAxis);
-
-//     pdf.setFont("helvetica", "normal");
-
-//     let splitTitle = pdf.splitTextToSize(program, 160);
-//     pdf.text(splitTitle, 37, yAxis);
-
-//     pdf.setFont("helvetica", "bold");
-//     pdf.text("UNIDAD", 10, yAxis + 10);
-//     pdf.text(":", 34, yAxis + 10);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(unitRegistration, 37, yAxis + 10);
-
-//     pdf.setFont("helvetica", "bold");
-//     pdf.text("SEDE", 10, yAxis + 15);
-//     pdf.text(":", 34, yAxis + 15);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(sedeRegistration, 37, yAxis + 15);
-
-//     pdf.setFont("helvetica", "bold");
-//     pdf.text("ESTUDIANTE", 10, yAxis + 20);
-//     pdf.text(":", 34, yAxis + 20);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(person, 37, yAxis + 20);
-
-//     let totalAprovedCourse = 0;
-//     let totalAprovedCredit = 0;
-//     let aprovedPromedi = 0;
-//     let totalCourse = 0;
-//     let totalCredit = 0;
-//     let generalPromedi = 0;
-//     let initialTableY = 80;
-
-//     pdf.setFontSize(7);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(moment().format("HH:mm DD/MM/YYYY "), 181, initialTableY - 2);
-//     pdf.setFontSize(10);
-//     let academicSemester = "-";
-//     if (registration.length > 0) {
-//         for (let i = 0; i < registration.length; i++) {
-//             let tempBody = [];
-//             for (
-//                 let j = 0;
-//                 j < registration[i].Registration_course.length;
-//                 j++
-//             ) {
-//                 let typeCourse =
-//                     registration[i].Registration_course[j].type_course ===
-//                     "Obligatorio"
-//                         ? "O"
-//                         : "E";
-//                 totalCourse = totalCourse + 1;
-//                 totalCredit =
-//                     totalCredit +
-//                     registration[i].Registration_course[j].credits;
-//                 generalPromedi =
-//                     generalPromedi +
-//                     registration[i].Registration_course[j].note;
-//                 totalAprovedCourse =
-//                     registration[i].Registration_course[j].note >= 14
-//                         ? totalAprovedCourse + 1
-//                         : totalAprovedCourse;
-//                 aprovedPromedi =
-//                     registration[i].Registration_course[j].note >= 14
-//                         ? aprovedPromedi +
-//                           registration[i].Registration_course[j].note
-//                         : aprovedPromedi;
-//                 totalAprovedCredit =
-//                     registration[i].Registration_course[j].note >= 14
-//                         ? totalAprovedCredit +
-//                           registration[i].Registration_course[j].credits
-//                         : totalAprovedCredit;
-//                 let noteText = numberToLetter(
-//                     parseInt(registration[i].Registration_course[j].note)
-//                 );
-//                 tempBody.push([
-//                     registration[i].Registration_course[j].id,
-//                     registration[i].Registration_course[j].denomination,
-//                     "NN",
-//                     "",
-//                     typeCourse,
-//                     registration[i].Registration_course[j].credits,
-//                     registration[i].Registration_course[j].note +
-//                         " " +
-//                         noteText,
-//                 ]);
-//             }
-//             pdf.setFont("helvetica", "bold");
-//             pdf.text("SEMESTRE", 10, initialTableY - 2);
-//             pdf.setFont("helvetica", "normal");
-//             academicSemester = registration[i].Academic_semester.denomination;
-
-//             pdf.text(
-//                 registration[i].Academic_semester.Academic_calendar
-//                     .denomination +
-//                     " - " +
-//                     academicSemester,
-//                 37,
-//                 initialTableY - 2
-//             );
-//             pdf.autoTable({
-//                 margin: [28, 10],
-//                 theme: "grid",
-//                 styles: { fontSize: 7, font: "helvetica", fontStyle: "normal" },
-//                 headStyles: {
-//                     font: "helvetica",
-//                     fontStyle: "bold",
-//                     fillColor: "#000",
-//                 },
-//                 columnStyles: {
-//                     0: { cellWidth: 15 },
-//                     1: { cellWidth: 119 },
-//                     2: { cellWidth: 7 },
-//                     3: { cellWidth: 8 },
-//                     4: { cellWidth: 8 },
-//                     5: { cellWidth: 8 },
-//                     6: { cellWidth: 25 },
-//                 },
-//                 startY: initialTableY,
-//                 head: [["CODIGO", "CURSO", "CV", "TN", "TC", "CR", "NOTA"]],
-//                 body: tempBody,
-//             });
-//             initialTableY = pdf.lastAutoTable.finalY + 10;
-//         }
-//         initialTableY = pdf.lastAutoTable.finalY;
-//     }
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("TOTAL CURSOS", 10, initialTableY + 15);
-//     pdf.text(":", 50, initialTableY + 15);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(String(totalCourse), 52, initialTableY + 15);
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("TOTAL CREDITOS", 10, initialTableY + 20);
-//     pdf.text(":", 50, initialTableY + 20);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(String(totalCredit), 52, initialTableY + 20);
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("PROMEDIO GENERAL", 10, initialTableY + 25);
-//     pdf.text(":", 50, initialTableY + 25);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(
-//         String(Math.round((generalPromedi / totalCourse) * 100) / 100),
-//         52,
-//         initialTableY + 25
-//     );
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("TOTAL DE CURSOS APROBADOS", 110, initialTableY + 15);
-//     pdf.text(":", 173, initialTableY + 15);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(String(totalAprovedCourse), 175, initialTableY + 15);
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("TOTAL DE CREDITOS APROBADOS", 110, initialTableY + 20);
-//     pdf.text(":", 173, initialTableY + 20);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(String(totalAprovedCredit), 175, initialTableY + 20);
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("PROMEDIO CR. APR..", 110, initialTableY + 25);
-//     pdf.text(":", 173, initialTableY + 25);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text(
-//         String(
-//             totalAprovedCourse !== 0
-//                 ? Math.round((aprovedPromedi / totalAprovedCourse) * 100) / 100
-//                 : 0
-//         ),
-//         175,
-//         initialTableY + 25
-//     );
-//     pdf.setFontSize(8);
-//     pdf.setFont("helvetica", "normal");
-//     pdf.text("Leyenda :", 10, initialTableY + 40);
-//     pdf.text("TN : Tipo de nota", 30, initialTableY + 40);
-//     pdf.text(
-//         "TC : Tipo de curso(O=Obligatorio, E=Electivo)",
-//         55,
-//         initialTableY + 40
-//     );
-//     pdf.text("CR : Nro.Cred x Curso", 118, initialTableY + 40);
-//     pdf.text("CV : Curso Convalidado(C)", 150, initialTableY + 40);
-
-//     const pageCount = pdf.internal.getNumberOfPages();
-
-//     pdf.setFont("helvetica", "normal");
-//     pdf.setFontSize(8);
-//     for (let i = 1; i <= pageCount; i++) {
-//         pdf.setPage(i);
-//         pdf.text("Pag " + String(i) + " de " + String(pageCount), 197, 287, {
-//             align: "right",
-//         });
-//     }
-
-//     // Total page number plugin only available in jspdf v1.0+
-//     if (typeof pdf.putTotalPages === "function") {
-//         pdf.putTotalPages(totalPagesExp);
-//     }
-
-//     pdf.save("RECORD-ACADEMICO-" + person + ".pdf");
-// };
 
 const pdfReportAutoTableStudyPlan = async (data) => {
     console.log(data);
@@ -5170,6 +5123,7 @@ const pdfReportAutoTableActa = async (record) => {
             "center"
         );
         pdf.setLineWidth(0.3);
+        pdf.setDrawColor(0, 0, 0);
         pdf.line(10, 53, 200, 53);
 
         pdf.setFontSize(9.5);
@@ -5208,12 +5162,6 @@ const pdfReportAutoTableActa = async (record) => {
         );
         pdf.text(splitCourse, 39, 78);
 
-        // pdf.setFont("helvetica", "bold");
-        // pdf.text("CÓDIGO", 10, 86);
-        // pdf.text(":", 36, 86);
-        // pdf.setFont("helvetica", "normal");
-        // pdf.text(courseCode, 39, 86);
-
         let ySpace = 5;
         if (splitCourse.length > 1) {
             ySpace = 9
@@ -5236,9 +5184,15 @@ const pdfReportAutoTableActa = async (record) => {
         pdf.text(typeCourse, 100, 78 + ySpace);
 
         pdf.setFont("helvetica", "bold");
-        pdf.text("DOCENTE RESPONSABLE :", 10, 83 + ySpace);
+        pdf.text("SEMESTRE ACADÉMICO :", 135, 78 + ySpace);
         pdf.setFont("helvetica", "normal");
-        pdf.text(teacher, 58,  83 + ySpace);
+        pdf.text(semester, 179, 78 + ySpace);
+
+        pdf.setFont("helvetica", "bold");
+        pdf.text("DOCENTE", 10, 83 + ySpace);
+        pdf.text(":", 36, 83 + ySpace);
+        pdf.setFont("helvetica", "normal");
+        pdf.text(teacher, 39, 83 + ySpace);
     };
 
     const addContent = (part) => {
@@ -5264,7 +5218,7 @@ const pdfReportAutoTableActa = async (record) => {
                 fontSize: 9,
                 font: "helvetica",
                 fontStyle: "normal",
-                cellPadding: 1.5,
+                cellPadding: 1.3,
             },
             columnStyles: {
                 0: { cellWidth: 8 },
@@ -5277,18 +5231,49 @@ const pdfReportAutoTableActa = async (record) => {
     };
 
     const addFooter = (finalTable) => {
+        pdf.setFontSize(8);
+        pdf.setFont("helvetica", "bold");
+        pdf.text("FECHA DE EMISIÓN :", 10, finalTable + 6);
+        pdf.setFont("helvetica", "normal");
+        pdf.text(moment(actaDate).format("DD/MM/YYYY"), 40, finalTable + 6);
+
+        pdf.setFont("helvetica", "bold");
+        pdf.text("HORA DE EMISIÓN :", 63, finalTable + 6);
+        pdf.setFont("helvetica", "normal");
+        pdf.text(
+            moment(actaDate).format("HH:mm:ss") + " Hrs",
+            91,
+            finalTable + 6
+        );
+
+        pdf.setFont("helvetica", "bold");
+        pdf.text("FECHA DE RECEPCIÓN :", 133, 260);
+        pdf.setLineWidth(0.3);
+        pdf.setDrawColor(0, 0, 0);
+        pdf.line(170, 260, 200, 260);
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setDrawColor(0, 0, 0);
+        pdf.setFontSize(8);
+        pdf.setLineWidth(0.3);
+        pdf.setDrawColor(0, 0, 0);
+        pdf.line(20, 237, 70, 237);
+        pdf.text("DOCENTE", 37, 240);
+        pdf.line(140, 237, 190, 237);
+        pdf.text("V° B° COORDINADOR USE", 147, 240);
+
         pdf.autoTable({
             margin: [10, 10],
             theme: "grid",
-            startY: finalTable + 5,
-            tableWidth: 95,
+            startY: 245,
+            tableWidth: 120,
             headStyles: {
                 font: "helvetica",
                 fontStyle: "bold",
                 fillColor: "#000",
                 halign: "center",
             },
-            head: [["MATRICULADOS", "APROBADOS", "DESAPROBADOS"]],
+            head: [["DESCRIPCIÓN", "MATRICULADOS", "APROBADOS", "DESAPROBADOS"]],
             styles: {
                 fontSize: 9,
                 font: "helvetica",
@@ -5297,72 +5282,45 @@ const pdfReportAutoTableActa = async (record) => {
                 cellPadding: { top: 1, bottom: 1 },
             },
             body: [
-                [totalStudent, approvedStudent, desaprovedStudent],
+                ["CANTIDAD", totalStudent, approvedStudent, desaprovedStudent],
                 [
-                    "100 %",
-                    Math.round((approvedStudent * 100) / totalStudent) + " %",
-                    Math.round((desaprovedStudent * 100) / totalStudent) + " %",
+                    "PORCENTAJE",
+                    "100.00%",
+                    Math.round((approvedStudent * 100) / totalStudent).toFixed(2) + "%",
+                    Math.round((desaprovedStudent * 100) / totalStudent).toFixed(2) + "%",
                 ],
             ],
         });
 
-        pdf.setFontSize(8);
-        pdf.setFont("helvetica", "bold");
-        pdf.text("FECHA CREACIÓN :", 140, finalTable + 8);
-        pdf.setFont("helvetica", "normal");
-        pdf.text(moment(actaDate).format("DD/MM/YYYY"), 170, finalTable + 8);
 
-        pdf.setFont("helvetica", "bold");
-        pdf.text("HORA CREACIÓN :", 140, finalTable + 15);
-        pdf.setFont("helvetica", "normal");
-        pdf.text(
-            moment(actaDate).format("HH:mm:ss") + " Hrs",
-            170,
-            finalTable + 15
-        );
 
         let finalTable3 = pdf.lastAutoTable.finalY;
 
-        pdf.setFontSize(8);
+        pdf.setFontSize(7);
         pdf.setFont("helvetica", "bold");
-        pdf.text("1. ORIGINAL", 10, finalTable3 + 7);
-        pdf.text(":", 33, finalTable3 + 7);
+        pdf.text("1. ORIGINAL", 10, finalTable3 + 5);
+        pdf.text(":", 33, finalTable3 + 5);
         pdf.setFont("helvetica", "normal");
-        pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 7);
+        pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 5);
 
         pdf.setFont("helvetica", "bold");
-        pdf.text("2. COPIA", 10, finalTable3 + 12);
-        pdf.text(":", 33, finalTable3 + 12);
+        pdf.text("2. COPIA", 10, finalTable3 + 8);
+        pdf.text(":", 33, finalTable3 + 8);
         pdf.setFont("helvetica", "normal");
-        pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 12);
+        pdf.text(principalOrganicUnit.toUpperCase(), 35, finalTable3 + 8);
 
         pdf.setFont("helvetica", "bold");
-        pdf.text("3. COPIA", 10, finalTable3 + 17);
-        pdf.text(":", 33, finalTable3 + 17);
+        pdf.text("3. COPIA", 10, finalTable3 + 11);
+        pdf.text(":", 33, finalTable3 + 11);
         pdf.setFont("helvetica", "normal");
-        pdf.text("DIRECCIÓN DE ASUNTOS ACADÉMICOS", 35, finalTable3 + 17);
+        pdf.text("DIRECCIÓN DE ASUNTOS ACADÉMICOS", 35, finalTable3 + 11);
 
         pdf.setFont("helvetica", "bold");
-        pdf.text("4. COPIA", 10, finalTable3 + 22);
-        pdf.text(":", 33, finalTable3 + 22);
+        pdf.text("4. COPIA", 10, finalTable3 + 14);
+        pdf.text(":", 33, finalTable3 + 14);
         pdf.setFont("helvetica", "normal");
-        pdf.text("DOCENTE RESPONSABLE", 35, finalTable3 + 22);
+        pdf.text("DOCENTE", 35, finalTable3 + 14);
 
-        pdf.setFont("helvetica", "bold");
-        pdf.setLineDash([2]);
-        pdf.text("FECHA RECEPCIÓN :", 140, finalTable3 + 22);
-        pdf.line(170, finalTable3 + 22, 200, finalTable3 + 22);
-        // pdf.text("HORA RECEPCIÓN :", 140, finalTable3 + 22);
-        // pdf.line(170, finalTable3 + 22, 200, finalTable3 + 22);
-
-        pdf.setFont("helvetica", "bold");
-        pdf.setDrawColor(0, 0, 0);
-        pdf.setFontSize(8);
-        pdf.setLineDash([2]);
-        pdf.line(20, finalTable3 + 50, 70, finalTable3 + 50);
-        pdf.text("V°,B' COORDINADOR USE", 25, finalTable3 + 53);
-        pdf.line(140, finalTable3 + 50, 190, finalTable3 + 50);
-        pdf.text("DOCENTE RESPONSABLE", 148, finalTable3 + 53);
     };
 
     for (let index = 0; index < pagesGenerate; index++) {
@@ -5376,7 +5334,7 @@ const pdfReportAutoTableActa = async (record) => {
 
         pdf.setFont("helvetica", "normal");
         pdf.text(
-            "Pag " + String(index + 1) + " de " + String(pagesGenerate),
+            "Pág " + String(index + 1) + " de " + String(pagesGenerate),
             197,
             287,
             {

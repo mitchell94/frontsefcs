@@ -370,7 +370,6 @@ class ProgramForm extends React.Component {
                 this.setState({
                     denomination: event.target.value
                         .slice(0, 255)
-                        .toUpperCase(),
                 });
                 break;
             case "organicUnitOrigin":

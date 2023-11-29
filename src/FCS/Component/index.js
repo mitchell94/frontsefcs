@@ -1360,7 +1360,7 @@ const pdfReportAutoTableFichaRegistration = async (
     pdf.text("ESTUDIANTE", 10, 85);
     pdf.text(":", 34, 85);
     pdf.setFont("helvetica", "normal");
-    pdf.text(personData.name, 37, 85);
+    pdf.text(personData.name2, 37, 85);
 
     pdf.setFont("helvetica", "bold");
     pdf.text("CÓDIGO/DNI", 10, 90);
@@ -5681,6 +5681,140 @@ const Notify = (type, message) => {
     }
 };
 
+
+// NUEVAS FUNCIONES MPT
+const pdfReportAutoTableConstancyExpeditoSustentationSeunsm = async (data) => {
+    let student = data.studentData.Person.name;
+    let firtsRegister = data.firtsRegister;
+    let lastRegister = data.lastRegister;
+    let codeStudent = data.studentData.Person.document_number;
+    let program = data.studentData.Program.denomination;
+    let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
+    let credit = data.studentData.Admission_plan.Plan.credit_required;
+    let correlative = data.correlative;
+    let date = data.date;
+    let principalOrganicUnit = data.principalOrganicUnit.description;
+
+    // GENDER
+    let articleGender = data.studentData.Person.gender === 'Femenino' ? 'La' : 'El';
+    let interestedGender = data.studentData.Person.gender === 'Femenino' ? 'de la interesada' : 'del interesado';
+
+    const pdf = new jsPDF();
+    const totalPagesExp = "{total_pages_count_string}";
+    let pageWidth = pdf.internal.pageSize.getWidth();
+    pdf.addImage(imgUnsm, "PNG", 10, 10, 24, 24);
+    pdf.setFontSize(16);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(universityName.toUpperCase(), pageWidth / 2, 16, "center");
+    pdf.setFontSize(13);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(facultyName.toUpperCase(), pageWidth / 2, 23, "center");
+    pdf.setFontSize(15);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(unityName.toUpperCase(), pageWidth / 2, 31, "center");
+    pdf.addImage(imgFcs, "PNG", 175, 10, 24, 24);
+
+    pdf.setFontSize(19);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(
+        "CONSTANCIA DE EXPEDITO PARA SUSTENTACIÓN N° " + correlative,
+        pageWidth / 2,
+        50,
+        "center"
+    );
+    pdf.setLineWidth(0.3);
+    pdf.line(10, 52, 200, 52);
+
+    pdf.setFontSize(14);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(
+        "La Obsta. Mg. Ynés Torres Flores - Coordinadora de la " +
+        unityName +
+        " - " +
+        facultyName +
+        " - " +
+        universityName +
+        ", extiende la presente constancia a:",
+        10,
+        65,
+        {
+            maxWidth: 189,
+            align: "justify",
+        }
+    );
+
+    pdf.setFontSize(19);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("Obsta. " + student, pageWidth / 2, 90, "center");
+
+    pdf.setFontSize(14);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(
+        articleGender +
+        " estudiante con código (DNI) N° " +
+        codeStudent +
+        ", ha culminado sus estudios en el Programa de " +
+        program +
+        " - Promoción Ingreso " +
+        admissionPlan +
+        ", con un total de " +
+        credit +
+        " créditos de acuerdo a las Normas y Reglamentos de la " +
+        unityName +
+        " - " + facultyName + " - " +
+        universityName +
+        ".",
+        10,
+        103,
+        {
+            maxWidth: 189,
+            align: "justify",
+        }
+    );
+    pdf.text(
+        "Fecha inicio: " + firtsRegister + "; Fecha fin: " + lastRegister,
+        10,
+        140,
+        {
+            maxWidth: 189,
+            align: "justify",
+        }
+    );
+    pdf.text(
+        "Se extiende la presente constancia a petición " + interestedGender + " para los fines que considere conveniente.",
+        10,
+        152,
+        {
+            maxWidth: 189,
+            align: "justify",
+        }
+    );
+
+    pdf.setFont("helvetica", "bold");
+    pdf.text("Tarapoto, " + date, 118, 185);
+
+    pdf.text("Atentamente", pageWidth / 2, 210, "center");
+
+    pdf.line(58, 249, 153, 249);
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(11);
+    pdf.text("Obsta. Mg. Ynés Torres Flores", pageWidth / 2, 253.5, "center");
+    pdf.setFont("helvetica", "normal");
+
+    pdf.text("COORDINADORA", pageWidth / 2, 258.5, "center");
+
+    pdf.setFontSize(11);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 263.5, "center");
+
+    // Total page number plugin only available in jspdf v1.0+
+    if (typeof pdf.putTotalPages === "function") {
+        pdf.putTotalPages(totalPagesExp);
+    }
+
+    pdf.save("CONSTANCIA-EGRESO-" + student + ".pdf");
+};
+
 const Componet = {
     ORGANIC_UNIT,
     USER_TYPE,
@@ -5723,6 +5857,8 @@ const Componet = {
     pdfReportAutoTableConstancyEgressSeunsm,
     pdfReportAutoTableConstancyAdeudarSeunsm,
     pdfReportAutoTableConstancyDisciplinarySeunsm,
+    // MPT
+    pdfReportAutoTableConstancyExpeditoSustentationSeunsm,
 };
 
 export default Componet;

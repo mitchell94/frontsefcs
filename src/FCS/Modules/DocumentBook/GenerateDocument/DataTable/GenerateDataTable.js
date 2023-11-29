@@ -407,6 +407,37 @@ class Index extends Component {
         }
     }
 
+    // MPT
+    async reportConstancyExpeditoSustentationSeunsm(
+        id_student,
+        id_document_book
+    ) {
+        this.setState({ registrationDataLoader: true });
+        const url =
+            app.general +
+            "/report-constancy-expedito-sustentation/" +
+            id_student +
+            "/" +
+            id_document_book;
+        try {
+            const res = await axios.get(url, app.headers);
+            if (res.data) console.log(res.data);
+
+            component.pdfReportAutoTableConstancyExpeditoSustentationSeunsm(
+                res.data
+            );
+            // this.setState({registrationDataLoader: false});
+        } catch (err) {
+            // this.setState({registrationDataLoader: false});
+            PNotify.error({
+                title: "Oh no!",
+                text: "Algo salio mal al cargar los datos",
+                delay: 2000,
+            });
+            console.log(err);
+        }
+    }
+
     async listAcademicCalendar() {
         this.setState({ calendarLoader: true });
         const url = app.general + "/" + app.academicCalendar;
@@ -581,6 +612,12 @@ class Index extends Component {
                 break;
             case "c_orden_merito":
                 this.reportConstancyOrdenMerito(id_student, id_document_book);
+                break;
+            case "c_expedito_sustentation_seunsm":
+                this.reportConstancyExpeditoSustentationSeunsm(
+                    id_student,
+                    id_document_book
+                );
                 break;
             default:
                 break;
@@ -1093,6 +1130,28 @@ class Index extends Component {
                                                     onClick={() =>
                                                         this.downloadPdf(
                                                             "c_expedito_seunsm",
+                                                            value.id_student,
+                                                            value.id
+                                                        )
+                                                    }
+                                                />
+                                            </OverlayTrigger>
+                                        )
+                                    }
+
+                                    {
+                                        //CONSTANCIA DE EXPEDITO SUSTENTACIÓN SEGUNDA ESPECIALIDAD
+                                        value.Concept.id === 130 && (
+                                            <OverlayTrigger
+                                                overlay={
+                                                    <Tooltip>DESCARGAR</Tooltip>
+                                                }
+                                            >
+                                                <GetApp
+                                                    style={{ color: "#C133FF" }}
+                                                    onClick={() =>
+                                                        this.downloadPdf(
+                                                            "c_expedito_sustentation_seunsm",
                                                             value.id_student,
                                                             value.id
                                                         )

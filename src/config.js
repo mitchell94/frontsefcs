@@ -15,6 +15,6 @@ export default {
   mode: "DEV", //PRO DEV TEST
   entity: 2,
   entityName: "SEGUNDA ESPECIALIDAD FCS",
-  hostPro: "http://localhost:8899/",
+  hostPro: "http://localhost:8899/api/",
   // hostPro: "https://asefcs.unsm.edu.pe/api/",
 };

@@ -466,7 +466,7 @@ class FormOperation extends React.Component {
                                             : null
                                     }
                                 >
-                                    Proceso de admisión
+                                    Periodo Actual
                                     <small className="text-danger"> *</small>
                                 </Form.Label>
 
@@ -482,7 +482,7 @@ class FormOperation extends React.Component {
                                         onChange={this.handleChange("process")}
                                     >
                                         <option defaultValue={true} hidden>
-                                            Proceso
+                                            Periodo
                                         </option>
                                         {processs.length > 0 ? (
                                             processs.map((r, index) => {
@@ -546,7 +546,7 @@ class FormOperation extends React.Component {
                                             role="status"
                                         />
                                     )}
-                                    Guardar Cambios
+                                    Guardar Cambiosdd
                                 </Button>
                             )}
                         </Col>

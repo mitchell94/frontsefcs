@@ -390,10 +390,6 @@ export default class Dashboard extends Component {
                                         eventKey="contact"
                                         title="TRABAJO"
                                     ></Tab>
-                                    <Tab
-                                        eventKey="resolutions"
-                                        title="RESOLUCIONES"
-                                    ></Tab>
                                 </Tabs>
                             </Card.Body>
                         </Card>
@@ -595,9 +591,8 @@ export default class Dashboard extends Component {
                                     );
                                 })}
                         </Row>
-                        
                     </Col>
-
+                    
                     <Modal show={modalObservation}>
                         <Modal.Header className="bg-primary">
                             <Modal.Title as="h5" style={{ color: "#ffffff" }}>

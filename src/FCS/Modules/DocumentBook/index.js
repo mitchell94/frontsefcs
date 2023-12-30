@@ -48,8 +48,6 @@ export default class Dashboard extends Component {
             {this.state.activeTab === 2 && <GenerateDocument/>}
             {this.state.activeTab === 3 && <ActaBook/>}
             {/*{this.state.activeTab === 2 && <FinancierDashboard/>}*/}
-
-
         </>);
     }
 }

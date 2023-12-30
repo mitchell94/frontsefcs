@@ -2,7 +2,7 @@
   "name": "postgrade",
   "version": "1.0.0",
   "private": true,
-  "homepage": "/",
+  "homepage": "/admin/",
   "dependencies": {
     "@ckeditor/ckeditor5-build-balloon": "^12.3.0",
     "@ckeditor/ckeditor5-build-classic": "^12.3.0",

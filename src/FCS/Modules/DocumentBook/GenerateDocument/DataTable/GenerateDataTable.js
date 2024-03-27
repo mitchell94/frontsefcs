@@ -76,46 +76,46 @@ class Index extends Component {
         }
     }
 
-    // async reportCertyStudySeunsm(id_student, id_document_book) {
-    //   // this.setState({registrationDataLoader: true});
-    //   const url =
-    //     app.general + "/report-cert-study/" + id_student + "/" + id_document_book;
-    //   try {
-    //     const res = await axios.get(url, app.headers);
-    //     if (res.data) console.log(res.data);
-    //     component.pdfReportAutoTableCertStudySeunsm(res.data);
-    //     // this.setState({registrationDataLoader: false});
-    //   } catch (err) {
-    //     // this.setState({registrationDataLoader: false});
-    //     PNotify.error({
-    //       title: "Oh no!",
-    //       text: "Algo salio mal al cargar los datos",
-    //       delay: 2000,
-    //     });
-    //     console.log(err);
-    //   }
-    // }
-
     async reportCertyStudySeunsm(id_student, id_document_book) {
-        const url =
-            app.general +
-            "/report-cert-study/" +
-            id_student +
-            "/" +
-            id_document_book;
-        try {
-            const res = await axios.get(url, app.headers);
-            console.log(res.data);
-            this.setState({ dataCert: res.data });
-        } catch (err) {
-            PNotify.error({
-                title: "Oh no!",
-                text: "Algo salio mal al cargar los datos",
-                delay: 2000,
-            });
-            console.log(err);
-        }
+      // this.setState({registrationDataLoader: true});
+      const url =
+        app.general + "/report-cert-study/" + id_student + "/" + id_document_book;
+      try {
+        const res = await axios.get(url, app.headers);
+        if (res.data) console.log(res.data);
+        component.pdfReportAutoTableCertStudySeunsm(res.data);
+        // this.setState({registrationDataLoader: false});
+      } catch (err) {
+        // this.setState({registrationDataLoader: false});
+        PNotify.error({
+          title: "Oh no!",
+          text: "Algo salio mal al cargar los datos",
+          delay: 2000,
+        });
+        console.log(err);
+      }
     }
+
+    // async reportCertyStudySeunsm(id_student, id_document_book) {
+    //     const url =
+    //         app.general +
+    //         "/report-cert-study/" +
+    //         id_student +
+    //         "/" +
+    //         id_document_book;
+    //     try {
+    //         const res = await axios.get(url, app.headers);
+    //         console.log(res.data);
+    //         this.setState({ dataCert: res.data });
+    //     } catch (err) {
+    //         PNotify.error({
+    //             title: "Oh no!",
+    //             text: "Algo salio mal al cargar los datos",
+    //             delay: 2000,
+    //         });
+    //         console.log(err);
+    //     }
+    // }
 
     async reportConstancyStudy(id_student, id_document_book) {
         this.setState({ registrationDataLoader: true });

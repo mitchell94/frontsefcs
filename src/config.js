@@ -16,6 +16,6 @@ export default {
   entity: 2,
   entityName: "SEGUNDA ESPECIALIDAD FCS",
   hostPro: "http://localhost:8899/api/",
-  // hostPro: "http://135.148.148.179:8899/api/",
+  // // hostPro: "http://135.148.148.179:8899/api/",
   // hostPro: "https://usefcs.unsm.edu.pe/api/",
 };

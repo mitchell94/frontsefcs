@@ -41,7 +41,7 @@ function StudyCertificate(props) {
             {createPortal(
                 <div className="print-page">
                     <div className="row">
-                        <div className="col correlative">N° {correlative}</div>
+                        <div className="col correlative">N° {correlative}-FCS-SE</div>
                     </div>
                     <div className="row">
                         <div className="col mb-3 cert-name">

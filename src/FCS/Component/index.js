@@ -1381,7 +1381,12 @@ const pdfReportAutoTableFichaRegistration = async (
     pdf.text("FECHA", 10, 100);
     pdf.text(":", 34, 100);
     pdf.setFont("helvetica", "normal");
-    pdf.text(moment(selected_date).format("DD/MM/YYYY"), 37, 100);
+
+    if (selected_date) {
+        pdf.text(moment(selected_date).format("DD/MM/YYYY"), 37, 100);
+    } else {
+        pdf.text(moment(created).format("DD/MM/YYYY"), 37, 100);
+    }
 
     pdf.setFont("helvetica", "bold");
     pdf.text("SEMESTRE", 10, 105);
@@ -1810,6 +1815,41 @@ const pdfReportAutoTableCertStudy2 = async (data) => {
     pdf.save("CERTIFICADO-ESTUDIOS-" + student + ".pdf");
 };
 
+// const pdfReportAutoTableCertStudySeunsm = async (data) => {
+
+//    // Crear una instancia de jsPDF
+//    const doc = new jsPDF();
+
+//    // Textos a incluir
+//    const text1 = "Este es un texto de ejemplo que será puesto en negrita y justificado. Esta función divide el texto para que se ajuste al ancho especificado, permitiendo un diseño más controlado del contenido.";
+//    const text2 = "Aquí hay otro texto que también estará en negrita y será justificado. Al utilizar esta técnica, podemos asegurarnos de que los textos largos se presenten de manera organizada y legible.";
+
+//    // Función para añadir texto justificado
+//    function addJustifiedText(doc, text, x, y, maxWidth) {
+//        const lines = doc.splitTextToSize(text, maxWidth);
+//        lines.forEach(line => {
+//            const textWidth = doc.getTextWidth(line);
+//            const spaceCount = (line.split(' ').length - 1) || 1;
+//            const extraSpace = (maxWidth - textWidth) / spaceCount;
+//            const justifiedLine = line.replace(/ /g, ' '.repeat(extraSpace + 1));
+//            doc.text(justifiedLine, x, y);
+//            y += 10; // Ajustar la posición y para la siguiente línea
+//        });
+//    }
+
+//    // Añadir texto con formato negrita y justificado
+//    doc.setFont("helvetica", "bold");
+
+//    // Añadir el primer texto
+//    addJustifiedText(doc, text1, 10, 20, 180);
+
+//    // Añadir el segundo texto
+//    addJustifiedText(doc, text2, 10, 50, 180);
+
+//    // Guardar el documento PDF
+//    doc.save("documento.pdf");
+// }
+
 const pdfReportAutoTableCertStudySeunsm = async (data) => {
     let student = data.studentData.Person.name;
     let photo = data.studentData.Person.photo;
@@ -1841,7 +1881,7 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
         " que " +
         "**" +
         student +
-        "** " +
+        " **" +
         "con código de matrícula " +
         "**" +
         dni +
@@ -1858,19 +1898,19 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
 
     pdf.setFontSize(19);
     pdf.setFont("times", "bold");
-    pdf.text("CERTIFICADO DE ESTUDIOS", pageWidth / 2, 44, "center");
+    pdf.text("CERTIFICADO DE ESTUDIOS", pageWidth / 2, 42, "center");
     pdf.setLineWidth(0.5);
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
     let startY = 54;
     let startX = 10;
     const fontSize = 4;
-    const lineSpacing = 5.2;
+    const lineSpacing = 5;
     const regex = /(\*{2})+/g;
     const textWithoutBoldMarks = textoCompleto.replace(regex, "");
     let splitTextWithoutBoldMarks = pdf.splitTextToSize(
         textWithoutBoldMarks,
-        200
+        190
     );
 
     let charsMapLength = 0;
@@ -1934,9 +1974,9 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
     pdf.autoTable({
         margin: [{ left: 10, right: 10, bottom: 5 }],
         theme: "plain",
-        startY: 74,
+        startY: 76,
         tableLineColor: [0, 0, 0],
-        tableLineWidth: 1,
+        tableLineWidth: 0.5,
         styles: {
             fontSize: 8,
             font: "helvetica",
@@ -1954,11 +1994,18 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
             font: "helvetica",
             fontSize: 8,
             lineColor: [0, 0, 0],
-            lineWidth: 0.5,
+            lineWidth: 0.3,
         },
         bodyStyles: {
             font: "helvetica",
             fontSize: 7,
+            // lineColor: [0, 0, 0],
+            // lineWidth: 0.3,
+            cellPadding: {
+                top: 1.3, // Adjust top padding in pixels
+                bottom: 1.3, // Adjust bottom padding in pixels
+                left: 2,
+            },
         },
         willDrawCell: (data) => {
             if (data.section === "body") {
@@ -1989,31 +2036,31 @@ const pdfReportAutoTableCertStudySeunsm = async (data) => {
         maxWidth: 158,
         align: "justify",
     });
-    pdf.setLineWidth(0.5);
+    pdf.setLineWidth(0.3);
     pdf.line(133, 76, 133, finalTable - 5);
     pdf.line(151, 76, 151, finalTable - 5);
-    pdf.line(167, 81, 167, finalTable - 5);
+    pdf.line(167, 89, 167, finalTable - 5);
     pdf.line(186, 76, 186, finalTable - 5);
-    pdf.setLineWidth(1);
+    pdf.setLineWidth(0.5);
     pdf.line(10, finalTable + 2, 200, finalTable + 1);
     pdf.line(10, finalTable + 12, 200, finalTable + 12);
     let falta = 289 - finalTable;
     pdf.line(10, finalTable - 5, 10, finalTable + falta);
     pdf.line(200, finalTable - 5, 200, finalTable + falta);
-    pdf.line(10, 288.5, 200, 288.5);
+    pdf.line(10, 289, 200, 289);
     if (finalTable >= 220) {
         pdf.addPage();
         finalTable = 10;
-        pdf.setLineWidth(1);
+        pdf.setLineWidth(0.5);
         pdf.line(10, finalTable - 0.5, 10, finalTable + 70.5);
-        pdf.line(200, finalTable - 0.5, 200, finalTable + 70.5);
+        pdf.line(201, finalTable - 0.5, 201, finalTable + 70.5);
         pdf.line(10, 10, 200, 10); //1 horizontal
         pdf.line(10, 80, 200, 80);
     }
     // let imgUrl = app.server + "photo/" + photo;
     // let imgPhoto = await getDataUri(imgUrl);
     // pdf.addImage(imgPhoto, "JPEG", 12, finalTable + 25, 33, 40);
-    pdf.setLineWidth(0.5);
+    pdf.setLineWidth(0.3);
     pdf.line(12, finalTable + 25, 45, finalTable + 25); //1 horizontal
     pdf.line(12, finalTable + 65, 45, finalTable + 65); //2 horizontal
     pdf.line(12.2, finalTable + 25, 12.2, finalTable + 65); //1 vertical

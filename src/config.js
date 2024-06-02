@@ -1,8 +1,8 @@
 export default {
-  defaultPath: "/",
-  basename: "/",
-  // defaultPath: "/admin/",
-  // basename: "/admin/",
+  // defaultPath: "/",
+  // basename: "/",
+  defaultPath: "/admin/",
+  basename: "/admin/",
   layout: "vertical",
   subLayout: "",
   collapseMenu: false,
@@ -12,10 +12,10 @@ export default {
   navFixedLayout: true,
   headerFixedLayout: false,
   boxLayout: false,
-  mode: "DEV", //PRO DEV TEST
+  mode: "PRO", //PRO DEV TEST
   entity: 2,
   entityName: "SEGUNDA ESPECIALIDAD FCS",
-  hostPro: "http://localhost:8899/api/",
+  // hostPro: "http://localhost:8899/api/",
   // // hostPro: "http://135.148.148.179:8899/api/",
-  // hostPro: "https://usefcs.unsm.edu.pe/api/",
+  hostPro: "https://usefcs.unsm.edu.pe/api/",
 };

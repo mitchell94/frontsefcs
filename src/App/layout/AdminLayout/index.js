@@ -170,6 +170,17 @@ class AdminLayout extends Component {
                         render={props => (<route.component {...props} />)}/>) : (null);
                 })
             }
+            // MPT
+            if (info.role.Role.denomination === 'Visualizador') {
+                menu = rutas.visualizador.map((route, index) => {
+                    return (route.component) ? (<Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        name={route.name}
+                        render={props => (<route.component {...props} />)}/>) : (null);
+                })
+            }
         }
 
 

@@ -176,6 +176,9 @@ const Config = {
     headers: headers,
     key: 'Fj2VmL7SqVLjr8dimsDKwIS8lnUZMysUe5gGsUBBc9PI2vG9Kb',
 
+    // MPT WEB
+    web: host + 'web',
+
 };
 
 export default Config;

@@ -666,7 +666,7 @@ export default class Report extends Component {
                                                             disabled={true}
                                                             type="butt-on"
                                                             className=" btn btn-success">No se
-                                                            encontraronsss
+                                                            encontraron
                                                             registros
                                                         </button>
                                                     </Col>

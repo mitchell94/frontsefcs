@@ -2843,12 +2843,15 @@ const pdfReportAutoTableConstancyEgress = async (data) => {
 
 const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     let student = data.studentData.Person.name;
+    // let firtsRegister = data.firtsRegister;
+    // let lastRegister = data.lastRegister;
     let codeStudent = data.studentData.Person.document_number;
     let program = data.studentData.Program.denomination;
-    // let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
+    let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
     let credit = data.studentData.Admission_plan.Plan.credit_required;
+    // let correlative = data.correlative;
     let date = data.date;
-    let lastRegister = data.lastRegister;
+    // let principalOrganicUnit = data.principalOrganicUnit.description;
 
     let calendarYear =
         data.studentLatestRegister.Academic_semester.Academic_calendar.denomination.split(
@@ -2859,16 +2862,27 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     let studentLatestRegister = calendarYear + "-" + semesterOrder;
 
     // GENDER
-    // let articleGender =
-    //     data.studentData.Person.gender === "Femenino" ? "La" : "El";
-    // let interestedGender =
-    //     data.studentData.Person.gender === "Femenino"
-    //         ? "de la interesada"
-    //         : "del interesado";
+    let articleGender =
+        data.studentData.Person.gender === "Femenino" ? "La" : "El";
+    let interestedGender =
+        data.studentData.Person.gender === "Femenino"
+            ? "de la interesada"
+            : "del interesado";
 
     const pdf = new jsPDF();
     const totalPagesExp = "{total_pages_count_string}";
     let pageWidth = pdf.internal.pageSize.getWidth();
+    // pdf.addImage(imgUnsm, "PNG", 15, 10, 24, 24);
+    // pdf.setFontSize(16);
+    // pdf.setFont("helvetica", "normal");
+    // pdf.text(universityName.toUpperCase(), pageWidth / 2, 16, "center");
+    // pdf.setFontSize(13);
+    // pdf.setFont("helvetica", "normal");
+    // pdf.text(facultyName.toUpperCase(), pageWidth / 2, 23, "center");
+    // pdf.setFontSize(15);
+    // pdf.setFont("helvetica", "normal");
+    // pdf.text(unityName.toUpperCase(), pageWidth / 2, 31, "center");
+    // pdf.addImage(imgFcs, "PNG", 170, 10, 24, 24);
 
     pdf.addImage(imgUnsm2, "PNG", 22, 12, 68, 22);
     pdf.addImage(imgFcs, "PNG", 165, 10, 24, 24);
@@ -2877,10 +2891,28 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     pdf.setFont("helvetica", "bold");
     pdf.text("CONSTANCIA DE EGRESADO", pageWidth / 2, 55, "center");
 
-    pdf.setFontSize(13.5);
+    // pdf.setFontSize(19);
+    // pdf.setFont("helvetica", "bold");
+    // pdf.text("CONSTANCIA DE EGRESADO", pageWidth / 2, 50, "center");
+    // pdf.text(
+    //     "CONSTANCIA DE EGRESO N° " + correlative,
+    //     pageWidth / 2,
+    //     50,
+    //     "center"
+    // );
+    // pdf.setLineWidth(0.3);
+    // pdf.line(15, 52, 195, 52);
+
+    pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "La Decana de la " + facultyName + " que suscribe, hace constar que:",
+        "La Coordinadora de la " +
+            unityName +
+            " - " +
+            facultyName +
+            " - " +
+            universityName +
+            ", hace constar que:",
         20,
         70,
         {
@@ -2889,46 +2921,55 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
         }
     );
 
-    pdf.rect(pageWidth / 2 - 13, 85, 26, 32);
+    // pdf.setFontSize(19);
+    // pdf.setFont("helvetica", "bold");
+    // pdf.text("Obsta. " + student, pageWidth / 2, 88, "center");
 
     pdf.setFontSize(15.5);
     pdf.setFont("helvetica", "bold");
-    pdf.text(student, pageWidth / 2, 125, "center");
+    pdf.text(student, pageWidth / 2, 90, "center");
 
-    pdf.setFontSize(13.5);
+    pdf.setFontSize(14);
     pdf.setFont("helvetica", "normal");
     pdf.text(
-        "Con código de matrícula N° " +
+        "Con código (DNI) N° " +
             codeStudent +
-            ", ha cumplido satisfactoriamente con los requisitos exigidos en el Plan de Estudios del Programa de Estudios de " +
+            ", ha culminado sus estudios en el Programa de Estudios de " +
             program +
-            " de la " +
-            facultyName +
-            ", habiendo aprobado " +
-            credit +
-            " créditos, al culminar el Semestre Académico " +
+            ", en el periodo " +
             studentLatestRegister +
-            " de fecha " +
-            lastRegister +
-            ", de acuerdo a las Normas y Reglamentos de la " +
+            ", con un total de " +
+            credit +
+            " créditos de acuerdo a las Normas y Reglamentos de la " +
             unityName +
             " - " +
             facultyName +
             " - " +
             universityName +
+            // ". Encontrándose en condición de EGRESADO.",
             ".",
         20,
-        138,
+        103,
         {
             maxWidth: 170,
             align: "justify",
         }
     );
-
+    // pdf.text(
+    //     "Fecha inicio: " + firtsRegister + "; Fecha fin: " + lastRegister,
+    //     10,
+    //     140,
+    //     {
+    //         maxWidth: 189,
+    //         align: "justify",
+    //     }
+    // );
     pdf.text(
-        "Se expide la presente, para los fines que estime conveniente.",
+        "Se extiende la presente constancia a petición " +
+            interestedGender +
+            " para los fines que considere conveniente.",
         20,
-        183,
+        147,
         {
             maxWidth: 170,
             align: "justify",
@@ -2936,34 +2977,153 @@ const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
     );
 
     pdf.setFont("helvetica", "bold");
-    pdf.text("Tarapoto, " + date, 118, 204);
+    pdf.text("Tarapoto, " + date, 118, 185);
 
-    pdf.text("Atentamente", pageWidth / 2, 220, "center");
+    pdf.text("Atentamente", pageWidth / 2, 210, "center");
 
-    pdf.line(55, 259, 156, 259);
+    pdf.line(58, 249, 153, 249);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(11);
-    pdf.text(
-        "Obsta. Dra. EVANGELINA AMPUERO FERNANDEZ",
-        pageWidth / 2,
-        263.5,
-        "center"
-    );
+    pdf.text("Obsta. Dra. ROSA RIOS LOPEZ", pageWidth / 2, 253.5, "center");
     pdf.setFont("helvetica", "normal");
 
-    pdf.text("DECANA", pageWidth / 2, 268.5, "center");
+    pdf.text("COORDINADORA", pageWidth / 2, 258.5, "center");
 
     pdf.setFontSize(11);
     pdf.setFont("helvetica", "normal");
-    pdf.text(facultyName, pageWidth / 2, 273.5, "center");
+    pdf.text(unityName + " - FCS - UNSM", pageWidth / 2, 263.5, "center");
 
     // Total page number plugin only available in jspdf v1.0+
-    // if (typeof pdf.putTotalPages === "function") {
-    //     pdf.putTotalPages(totalPagesExp);
-    // }
+    if (typeof pdf.putTotalPages === "function") {
+        pdf.putTotalPages(totalPagesExp);
+    }
 
-    pdf.save("CONSTANCIA-EGRESADO-" + student + ".pdf");
+    pdf.save("CONSTANCIA-EGRESO-" + student + ".pdf");
 };
+
+// const pdfReportAutoTableConstancyEgressSeunsm = async (data) => {
+//     let student = data.studentData.Person.name;
+//     let codeStudent = data.studentData.Person.document_number;
+//     let program = data.studentData.Program.denomination;
+//     // let admissionPlan = data.studentData.Admission_plan.description.substr(-7);
+//     let credit = data.studentData.Admission_plan.Plan.credit_required;
+//     let date = data.date;
+//     let lastRegister = data.lastRegister;
+
+//     let calendarYear =
+//         data.studentLatestRegister.Academic_semester.Academic_calendar.denomination.split(
+//             " "
+//         )[2];
+//     let semesterOrder =
+//         data.studentLatestRegister.Academic_semester.denomination.split(" ")[1];
+//     let studentLatestRegister = calendarYear + "-" + semesterOrder;
+
+//     // GENDER
+//     // let articleGender =
+//     //     data.studentData.Person.gender === "Femenino" ? "La" : "El";
+//     // let interestedGender =
+//     //     data.studentData.Person.gender === "Femenino"
+//     //         ? "de la interesada"
+//     //         : "del interesado";
+
+//     const pdf = new jsPDF();
+//     const totalPagesExp = "{total_pages_count_string}";
+//     let pageWidth = pdf.internal.pageSize.getWidth();
+
+//     pdf.addImage(imgUnsm2, "PNG", 22, 12, 68, 22);
+//     pdf.addImage(imgFcs, "PNG", 165, 10, 24, 24);
+
+//     pdf.setFontSize(19);
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("CONSTANCIA DE EGRESADO", pageWidth / 2, 55, "center");
+
+//     pdf.setFontSize(13.5);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         "La Decana de la " + facultyName + " que suscribe, hace constar que:",
+//         20,
+//         70,
+//         {
+//             maxWidth: 170,
+//             align: "justify",
+//         }
+//     );
+
+//     pdf.rect(pageWidth / 2 - 13, 85, 26, 32);
+
+//     pdf.setFontSize(15.5);
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text(student, pageWidth / 2, 125, "center");
+
+//     pdf.setFontSize(13.5);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(
+//         "Con código de matrícula N° " +
+//             codeStudent +
+//             ", ha cumplido satisfactoriamente con los requisitos exigidos en el Plan de Estudios del Programa de Estudios de " +
+//             program +
+//             " de la " +
+//             facultyName +
+//             ", habiendo aprobado " +
+//             credit +
+//             " créditos, al culminar el Semestre Académico " +
+//             studentLatestRegister +
+//             " de fecha " +
+//             lastRegister +
+//             ", de acuerdo a las Normas y Reglamentos de la " +
+//             unityName +
+//             " - " +
+//             facultyName +
+//             " - " +
+//             universityName +
+//             ".",
+//         20,
+//         138,
+//         {
+//             maxWidth: 170,
+//             align: "justify",
+//         }
+//     );
+
+//     pdf.text(
+//         "Se expide la presente, para los fines que estime conveniente.",
+//         20,
+//         183,
+//         {
+//             maxWidth: 170,
+//             align: "justify",
+//         }
+//     );
+
+//     pdf.setFont("helvetica", "bold");
+//     pdf.text("Tarapoto, " + date, 118, 204);
+
+//     pdf.text("Atentamente", pageWidth / 2, 220, "center");
+
+//     pdf.line(55, 259, 156, 259);
+//     pdf.setFont("helvetica", "bold");
+//     pdf.setFontSize(11);
+//     pdf.text(
+//         "Obsta. Dra. EVANGELINA AMPUERO FERNANDEZ",
+//         pageWidth / 2,
+//         263.5,
+//         "center"
+//     );
+//     pdf.setFont("helvetica", "normal");
+
+//     pdf.text("DECANA", pageWidth / 2, 268.5, "center");
+
+//     pdf.setFontSize(11);
+//     pdf.setFont("helvetica", "normal");
+//     pdf.text(facultyName, pageWidth / 2, 273.5, "center");
+
+//     // Total page number plugin only available in jspdf v1.0+
+//     // if (typeof pdf.putTotalPages === "function") {
+//     //     pdf.putTotalPages(totalPagesExp);
+//     // }
+
+//     pdf.save("CONSTANCIA-EGRESADO-" + student + ".pdf");
+// };
 
 const pdfReportAutoTableConstancyRegistration = async (data) => {
     let student = data.studentData.Person.name;
@@ -3547,8 +3707,13 @@ const pdfReportAutoTableConstancyAdeudarSeunsm = async (data) => {
 
     pdf.setFontSize(19);
     pdf.setFont("helvetica", "bold");
-    pdf.text("CONSTANCIA DE NO ADEUDAR BIENES", pageWidth / 2, 55, "center");
-    pdf.text("NI RECURSOS ECONÓMICOS", pageWidth / 2, 62, "center");
+    pdf.text("CONSTANCIA DE NO ADEUDAR BIENES,", pageWidth / 2, 55, "center");
+    pdf.text(
+        "MATERIALES BIBLIOGRÁFICOS Y/O DIDÁCTICOS",
+        pageWidth / 2,
+        62,
+        "center"
+    );
 
     pdf.setFontSize(13.5);
     pdf.setFont("helvetica", "normal");
@@ -3579,7 +3744,7 @@ const pdfReportAutoTableConstancyAdeudarSeunsm = async (data) => {
             codeStudent +
             ", y con estudios concluidos en el Programa de Estudios de " +
             program +
-            ", no adeuda bienes, ni recursos económicos a la " +
+            ", no adeuda bienes, materiales bibliográficos y/o didácticos a la " +
             universityName +
             ".",
         20,
